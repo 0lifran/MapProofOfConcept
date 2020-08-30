@@ -1,8 +1,25 @@
 #include "Item.h"
 
+Item::Item(string name)
+{
+	Name(name);
+	ImagePath("Item.png");
+	Id(0);
+}
+
 Item::Item()
 {
-	Id(0);
+
+}
+
+string Item::Name()
+{
+	return this->_name;
+}
+
+void Item::Name(string name)
+{
+	this->_name = name;
 }
 
 int Item::Id()

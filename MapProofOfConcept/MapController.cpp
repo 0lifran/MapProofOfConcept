@@ -3,11 +3,6 @@
 #include "RenderDataArray.h"
 
 
-MapController::MapController(int width, int height, Tile** tiles, int numberOfItems)
-{
-
-}
-
 MapController::MapController(int width, int height, Tile** tiles, MapItem* items, int numberOfItems)
 {
 	Tiles(width, height, tiles);

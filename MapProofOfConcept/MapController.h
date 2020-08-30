@@ -7,7 +7,6 @@
 class MapController
 {
 public:
-	MapController(int width, int height, Tile** tiles, int numberOfItems);
 	MapController(int width, int height, Tile** tiles, MapItem* items, int numberOfItems);
 	RenderDataArray* GetRenderData();
 

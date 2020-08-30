@@ -49,7 +49,14 @@ void Tile::ImagePath(TileType type)
 	case TileType::Grass:
 		ImagePath("Grass.png");
 		break;
+	case TileType::Mud:
+		ImagePath("Mud.png");
+		break;
+	case TileType::None:
+		ImagePath("");
+		break;
 	default:
+		throw new exception();
 		break;
 	}
 }

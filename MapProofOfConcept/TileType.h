@@ -1,5 +1,6 @@
 enum class TileType
 {
 	None,
-	Grass
+	Grass,
+	Mud
 };
