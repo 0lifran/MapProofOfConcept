@@ -1,28 +1,30 @@
 #include "Tile.h"
 
-Tile::Tile(int x, int y)
+Tile::Tile()
 {
-	Type(TileType::Grass);
+	Type(TileType::None);
 	Height(0);
 }
 
-Tile::Tile(int x, int y, TileType type)
+Tile::Tile(TileType type, int height)
+{
+	Type(type);
+	Height(height);
+}
+
+
+Tile::Tile(TileType type)
 {
 	Type(type);
 	Height(0);
 }
 
-Tile::Tile(int x, int y, int height)
+Tile::Tile(int height)
 {
 	Height(height);
 	Type(TileType::Grass);
 }
 
-Tile::Tile(int x, int y, TileType type, int height)
-{
-	Height(height);
-	Type(type);
-}
 
 Tile::~Tile()
 {

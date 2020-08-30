@@ -7,10 +7,10 @@ using namespace std;
 class Tile
 {
 public:
-	Tile(int x, int y);
-	Tile(int x, int y, TileType type);
-	Tile(int x, int y, int height);
-	Tile(int x, int y, TileType type, int height);
+	Tile();
+	Tile(TileType type);
+	Tile(int height);
+	Tile(TileType type, int height);
 	~Tile();
 
 	// Tile data
