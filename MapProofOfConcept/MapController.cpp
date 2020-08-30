@@ -13,8 +13,9 @@ void MapController::Items(int numberOfItems, MapItem* items)
 {
 	NumberOfItems(numberOfItems);
 
-	_items[128][128][1] = {};
-	_mapItems[1024] = {NULL};
+	// read violation?
+	_items = new Item**[128];
+	_mapItems[256] = *new MapItem[256]{};
 	for (int i = 0; i < numberOfItems; i++)
 	{
 		PlaceItem(items[i]);

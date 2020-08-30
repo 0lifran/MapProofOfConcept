@@ -9,7 +9,9 @@ Item::Item(string name)
 
 Item::Item()
 {
-
+	Id(-1);
+	Name("None");
+	ImagePath("None.png");
 }
 
 string Item::Name()
