@@ -3,31 +3,9 @@
 #include "RenderDataArray.h"
 
 
-MapController::MapController(int width, int height, Tile** tiles, MapItem* items, int numberOfItems)
+MapController::MapController(int width, int height, Tile** tiles)
 {
 	Tiles(width, height, tiles);
-	Items(numberOfItems, items);
-}
-
-void MapController::Items(int numberOfItems, MapItem* items)
-{
-	NumberOfItems(numberOfItems);
-
-	// read violation?
-	_items = new Item**[128];
-	_mapItems[256] = *new MapItem[256]{};
-	for (int i = 0; i < numberOfItems; i++)
-	{
-		PlaceItem(items[i]);
-	}
-}
-
-void MapController::PlaceItem(MapItem item)
-{
-	if (PlaceItemOnTile(item.Item, item.X, item.Y))
-	{
-		PlaceItemInMapItems(item);
-	}
 }
 
 void MapController::Tiles(int mapWidth, int mapHeight, Tile** tiles)
@@ -104,70 +82,4 @@ RenderDataArray* MapController::GetRenderData()
 		}
 	}
 	return new RenderDataArray{ lengthXY, renderingDataArray };
-}
-
-void MapController::MoveUnit(int id)
-{
-}
-
-void MapController::RemoveUnit(int id)
-{
-}
-
-void MapController::PlaceUnit(/*Unit unit, */int x, int y)
-{
-}
-
-void MapController::RemoveItem(int id)
-{
-}
-
-bool MapController::PlaceItemOnTile(Item item, int x, int y)
-{
-	// Temporary solution.
-	for (int i = 0; i < NumberOfItems(); i++)
-	{
-		if (this->_mapItems[i].X == x && this->_mapItems[i].Y == y)
-		{
-			this->_mapItems[i].Item = item;
-			this->_items[x][y][0] = item;
-			return true;
-		}
-	}
-
-	IncrementNumberOfItems();
-	this->_mapItems[NumberOfItems() - 1].Item = item;
-	this->_items[x][y][0] = item;
-	return true;
-}
-
-void MapController::PlaceItemInMapItems(MapItem item)
-{
-	_mapItems[NumberOfItems() - 1] = item;
-}
-
-int MapController::NumberOfItems()
-{
-	return this->_numberOfItems;
-}
-
-void MapController::NumberOfItems(int numberOfItems)
-{
-	if (numberOfItems > _MAXITEMNUMBERPERTILE)
-	{
-		this->_numberOfItems = _MAXITEMNUMBERPERTILE;
-	}
-	else 
-	{
-		this->_numberOfItems = numberOfItems;
-	}
-}
-
-void MapController::IncrementNumberOfItems()
-{
-	this->_numberOfItems++;
-}
-void MapController::DecrementNumberOfItems()
-{
-	this->_numberOfItems--;
 }

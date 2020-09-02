@@ -40,5 +40,5 @@ int main()
 	}
 
 	MapController mapController =
-		*new MapController(1, 1, tiles, items, 1);
+		*new MapController(1, 1, tiles);
 }
