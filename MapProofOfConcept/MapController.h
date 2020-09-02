@@ -17,6 +17,7 @@ private:
 	Tile** _tiles;	
 	int _mapWidth;
 	int _mapHeight;
+	int _numberOfItems;
 
 	int MapWidth();
 	void MapWidth(int width);
@@ -29,13 +30,17 @@ private:
 
 	// Item logic.
 	void RemoveItem(int id);
-	void PlaceItem(int id, int x, int y);
+	void PlaceItemOnTile(int id, int x, int y);
 
 	// Unit logic.
 	void RemoveUnit(int id);
 	void PlaceUnit(int id, int x, int y);
 	void MoveUnit(int id);
-	void RotateUnit(RotationDirection rotationDirection);
+	void RotateUnit(int id, RotationDirection rotationDirection);
+	int NumberOfItems();
+	void NumberOfItems(int numberOfItems);
+	void IncrementNumberOfItems();
+	void DecrementNumberOfItems();
 
 	// TileMap.
 	Tile** Tiles();

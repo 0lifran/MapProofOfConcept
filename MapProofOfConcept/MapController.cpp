@@ -83,3 +83,94 @@ RenderDataArray* MapController::GetRenderData()
 	}
 	return new RenderDataArray{ lengthXY, renderingDataArray };
 }
+
+// Item logic.
+int MapController::NumberOfItems()
+{
+	return this->_numberOfItems;
+}
+void MapController::NumberOfItems(int numberOfItems)
+{
+	this->_numberOfItems = numberOfItems;
+}
+void MapController::IncrementNumberOfItems()
+{
+	this->_numberOfItems++;
+}
+void MapController::DecrementNumberOfItems()
+{
+	this->_numberOfItems--;
+}
+
+void MapController::RemoveItem(int id)
+{
+	int x = -1;
+	int y = -1;
+	Item* currentItems = Items();
+	for (int i = 0; i < NumberOfItems(); i++)
+	{
+		if (currentItems[i].Id() == id)
+		{
+			x = currentItems[i].X();
+			y = currentItems[i].Y();
+			break;
+		}
+	}
+
+	if (x != -1 && y != -1)
+	{
+		Tile** tiles = Tiles();
+		Item* tempI = new Item();;
+		tiles[x, y]->TakeOutItem(id, tempI);
+		delete tempI;
+	}
+	else 
+	{
+		throw new exception();
+	}
+	
+}
+
+void MapController::PlaceItemOnTile(int id, int x, int y)
+{
+	Item* currentItems = Items();
+	for (int i = 0; i < NumberOfItems(); i++)
+	{
+		if (currentItems[i].Id() == id)
+		{
+			currentItems[i].X(x);
+			currentItems[i].Y(y);
+			this->_tiles[x][y].AddItem(currentItems);
+			return;
+		}
+	}
+	throw new exception("test");
+}
+
+// Unit logic.
+void MapController::RemoveUnit(int id)
+{
+
+}
+void MapController::PlaceUnit(int id, int x, int y)
+{
+
+}
+void MapController::MoveUnit(int id)
+{
+
+}
+void MapController::RotateUnit(int id, RotationDirection rotationDirection)
+{
+
+}
+
+Item* MapController::Items()
+{
+	return this->_items;
+}
+
+Unit* MapController::Units()
+{
+	return this->_units;
+}
