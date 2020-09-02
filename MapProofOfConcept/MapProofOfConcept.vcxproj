@@ -142,20 +142,22 @@
     <ClCompile Include="ItemType.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapController.cpp" />
-    <ClCompile Include="MapItem.cpp" />
     <ClCompile Include="RenderData.cpp" />
     <ClCompile Include="RenderDataArray.cpp" />
+    <ClCompile Include="RotationDirection.h" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Direction.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemType.h" />
     <ClInclude Include="MapController.h" />
-    <ClInclude Include="MapItem.h" />
     <ClInclude Include="RenderData.h" />
     <ClInclude Include="RenderDataArray.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileType.h" />
+    <ClInclude Include="Unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

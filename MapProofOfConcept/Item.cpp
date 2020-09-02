@@ -43,3 +43,20 @@ void Item::ImagePath(string imagePath)
 {
 	this->_imagePath = imagePath;
 }
+
+int Item::X()
+{
+	return this->_x;
+}
+int Item::Y()
+{
+	return this->_y;
+}
+void Item::X(int x)
+{
+	this->_x = x;
+}
+void Item::Y(int y)
+{
+	this->_y = y;
+}
