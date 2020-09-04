@@ -144,7 +144,7 @@ void MapController::PlaceItemOnTile(int id, int x, int y)
 			return;
 		}
 	}
-	throw new exception("test");
+	throw new exception("This item is not part of the item list.");
 }
 
 // Unit logic.
@@ -163,6 +163,16 @@ void MapController::MoveUnit(int id)
 void MapController::RotateUnit(int id, RotationDirection rotationDirection)
 {
 
+}
+
+void MapController::Items(Item* items)
+{
+	this->_items = items;
+}
+
+void MapController::Units(Unit* units)
+{
+	this->_units = units;
 }
 
 Item* MapController::Items()
