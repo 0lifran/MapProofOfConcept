@@ -11,16 +11,12 @@ public:
 	RenderDataArray* GetRenderData();
 
 private:
+	// TileMap.
 	const short _MAXMAPWIDTH = 128;
 	const short _MAXMAPHEIGHT = 128;
-
-	Tile** _tiles;	
-
+	Tile** _tiles;
 	int _mapWidth;
 	int _mapHeight;
-	int _numberOfItems;
-
-	// TileMap.
 	void Tiles(int mapWidth, int mapHeight, Tile** tiles);
 	Tile** Tiles();
 	int MapWidth();
@@ -29,26 +25,39 @@ private:
 	void MapHeight(int height);
 	Tile* SpecificTileAt(int x, int y);
 	void SpecificTileAt(Tile* tile, int x, int y);
+	Tile* Tiles(int x, int y);
+
 
 	// Item logic.
+	int _numberOfItems;
 	Item* _items;
 	Item* Items();
 	void Items(Item* items);
 	void RemoveItem(int id);
 	void PlaceItemOnTile(int id, int x, int y);
+	void PushItemToMap(int id);
+	int NumberOfItems();
+	void NumberOfItems(int numberOfItems);
+	int IncrementNumberOfItems();
+	int DecrementNumberOfItems();
+
 
 	// Unit logic.
 	Unit* _units;
+	int _numberOfUnits;
 	Unit* Units();
 	void Units(Unit* units);
 	void RemoveUnit(int id);
-	void PlaceUnit(int id, int x, int y);
+	void PlaceUnitOnTile(int id, int x, int y);
 	void MoveUnit(int id);
 	void RotateUnit(int id, RotationDirection rotationDirection);
-	int NumberOfItems();
-	void NumberOfItems(int numberOfItems);
-	void IncrementNumberOfItems();
-	void DecrementNumberOfItems();
+	int NumberOfUnits();
+	void NumberOfUnits(int numberOfUnits);
+	void PushUnitToMap(int id);
+	int IncrementNumberOfUnits();
+	int DecrementNumberOfUnits();
+
+	bool IsMovementAllowed(Unit* unit);
 
 	
 

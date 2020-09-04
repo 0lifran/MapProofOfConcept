@@ -1,0 +1,12 @@
+1. Struktureditorupdate:
+- Services laufen lassen
+- 4003 muss nicht laufen, WebRechnungen überspringen
+- Anschließend Web References laufen lassen
+
+2. Strg R + T: Test Explorer, hier kann man ausgewählte Tests laufen lassen
+
+3. AutoUpdater
+- Logs unter 2a\InterWattUpdater\Logs\iwtest1
+- Hängt der AutoUpdater, z.B. wegen offener Files (Druckapi) -> 2a neustarten ist eine Lösung
+- Application Pools restarten soll helfen (Services restarten?)
+

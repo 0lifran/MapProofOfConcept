@@ -13,6 +13,7 @@ public:
 	int Y();
 	void X(int x);
 	void Y(int y);
+	void Move();
 
 	string Name();
 	void Name(string name);

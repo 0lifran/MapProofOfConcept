@@ -87,3 +87,45 @@ void Unit::ImagePath(string path)
 {
 	this->_imagePath = path;
 }
+
+void Unit::Move()
+{
+	switch (DirectionAngle())
+	{
+	case Direction::North:
+		this->Y(this->Y() - 1);
+		break;
+
+	case Direction::NorthEast:
+		this->X(this->X() + 1);
+		this->Y(this->Y() - 1);
+		break;
+
+	case Direction::East:
+		this->X(this->X() + 1);
+		break;
+
+	case Direction::SouthEast:
+		this->X(this->X() + 1);
+		this->Y(this->Y() + 1);
+		break;
+
+	case Direction::South:
+		this->Y(this->Y() + 1);
+		break;
+
+	case Direction::SouthWest:
+		this->X(this->X() - 1);
+		this->Y(this->Y() + 1);
+		break;
+
+	case Direction::West:
+		this->X(this->X() - 1);
+		break;
+
+	case Direction::NorthWest:
+		this->X(this->X() - 1);
+		this->Y(this->Y() - 1);
+		break;
+	}
+}

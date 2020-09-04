@@ -12,7 +12,6 @@ Tile::Tile(TileType type, int height)
 	Height(height);
 }
 
-
 Tile::Tile(TileType type)
 {
 	Type(type);
@@ -24,7 +23,6 @@ Tile::Tile(int height)
 	Height(height);
 	Type(TileType::Grass);
 }
-
 
 Tile::~Tile()
 {
@@ -103,7 +101,7 @@ void Tile::AddItem(Item* item)
 		{
 			tempItems[i] = *item;
 		}
-		else 
+		else
 		{
 			tempItems[i] = currentItems[i - 1];
 		}
@@ -147,7 +145,7 @@ void Tile::RemoveItemAtPosition(int positionAt)
 		{
 			tempItems[i] = currentItems[i];
 		}
-		else 
+		else
 		{
 			tempItems[i] = currentItems[i + 1];
 		}
@@ -157,7 +155,6 @@ void Tile::RemoveItemAtPosition(int positionAt)
 int Tile::NumberOfItems()
 {
 	return this->_numberOfItems;
-
 }
 
 void Tile::NumberOfItems(int numberOfItems)
@@ -175,4 +172,97 @@ int Tile::DecrementNumberOfItems()
 {
 	this->_numberOfItems--;
 	return NumberOfItems();
+}
+
+Unit* Tile::Units()
+{
+	return this->_units;
+}
+
+void Tile::Units(Unit* units)
+{
+	this->_units = units;
+}
+void Tile::AddUnit(Unit* unit)
+{
+	int currentNumberOfUnits = IncrementNumberOfUnits();
+	Unit* currentUnits = Units();
+	Unit* tempUnits = new Unit[currentNumberOfUnits];
+	for (int i = 0; i < currentNumberOfUnits; i++)
+	{
+		if (i == 0)
+		{
+			tempUnits[i] = *unit;
+		}
+		else
+		{
+			tempUnits[i] = currentUnits[i - 1];
+		}
+	}
+}
+
+bool Tile::TakeOutUnit(int id, Unit* out)
+{
+	Unit* tempUnits = Units();
+	int positionAt = -1;
+	for (int i = 0; i < NumberOfUnits(); i++)
+	{
+		if (tempUnits->Id() == id)
+		{
+			positionAt = i;
+			Unit* result = GetUnitAtPosition(positionAt);
+			RemoveUnitAtPosition(positionAt);
+			out = result;
+			return true;
+		}
+	}
+	return false;
+}
+
+int Tile::NumberOfUnits()
+{
+	return this->_numberOfUnits;
+}
+
+void Tile::NumberOfUnits(int numberOfUnits)
+{
+	this->_numberOfUnits = numberOfUnits;
+}
+
+int Tile::IncrementNumberOfUnits()
+{
+	this->_numberOfUnits++;
+	return NumberOfUnits();
+}
+
+int Tile::DecrementNumberOfUnits()
+{
+	this->_numberOfUnits--;
+	return NumberOfUnits();
+}
+
+Unit* Tile::GetUnitAtPosition(int positionAt)
+{
+	Unit* result = &this->_units[positionAt];
+	RemoveUnitAtPosition(positionAt);
+	return result;
+}
+
+void Tile::RemoveUnitAtPosition(int positionAt)
+{
+	int numberOfUnits = DecrementNumberOfUnits();
+	Unit* tempUnits = new Unit[numberOfUnits];
+	Unit* currentUnits = Units();
+
+	for (int i = 0; i < numberOfUnits; i++)
+	{
+		if (i < positionAt)
+		{
+			tempUnits[i] = currentUnits[i];
+		}
+		else
+		{
+			tempUnits[i] = currentUnits[i + 1];
+		}
+	}
 }

@@ -1,6 +1,7 @@
 #include <string>
 #include "TileType.h"
 #include "Item.h"
+#include "Unit.h"
 
 using namespace std;
 
@@ -38,11 +39,25 @@ public:
 	Item* GetItemAtPosition(int positionAt);
 	void RemoveItemAtPosition(int positionAt);
 
+	// Unit data
+	Unit* Units();
+	void Units(Unit* unit);
+	void AddUnit(Unit* unit);
+	bool TakeOutUnit(int id, Unit* out);
+	int NumberOfUnits();
+	void NumberOfUnits(int numberOfUnits);
+	int IncrementNumberOfUnits();
+	int DecrementNumberOfUnits();
+	Unit* GetUnitAtPosition(int positionAt);
+	void RemoveUnitAtPosition(int positionAt);
+
 private:
 	int _height;
 	string _path;
 	TileType _type;
 	Item* _items;
 	int _numberOfItems;
+	Unit* _units;
+	int _numberOfUnits;
 };
 
