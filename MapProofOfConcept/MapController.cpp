@@ -170,16 +170,9 @@ void MapController::RemoveUnit(int id)
 {
 	int x = -1;
 	int y = -1;
-	Unit* currentUnits = Units();
-	for (int i = 0; i < NumberOfUnits(); i++)
-	{
-		if (currentUnits[i].Id() == id)
-		{
-			x = currentUnits[i].X();
-			y = currentUnits[i].Y();
-			break;
-		}
-	}
+	Unit* currentUnit = this->GetUnitById(id);
+	x = currentUnit->X();
+	y = currentUnit->Y();
 
 	if (x != -1 && y != -1)
 	{
@@ -195,18 +188,10 @@ void MapController::RemoveUnit(int id)
 }
 void MapController::PlaceUnitOnTile(int id, int x, int y)
 {
-	Unit* currentUnits = Units();
-	for (int i = 0; i < NumberOfUnits(); i++)
-	{
-		if (currentUnits[i].Id() == id)
-		{
-			currentUnits[i].X(x);
-			currentUnits[i].Y(y);
-			this->_tiles[x][y].AddUnit(&currentUnits[i]);
-			return;
-		}
-	}
-	throw new exception("This unit is not part of the unit list.");
+	Unit* currentUnit = this->GetUnitById(id);
+	currentUnit->X(x);
+	currentUnit->Y(y);
+	this->_tiles[x][y].AddUnit(currentUnit);
 }
 int MapController::IncrementNumberOfUnits()
 {
@@ -220,18 +205,10 @@ int MapController::DecrementNumberOfUnits()
 }
 void MapController::PushUnitToMap(int id)
 {
-	Unit* currentUnits = Units();
-	for (int i = 0; i < NumberOfUnits(); i++)
-	{
-		if (currentUnits[i].Id() == id)
-		{
-			int x = currentUnits[i].X();
-			int y = currentUnits[i].Y();
-			this->_tiles[x][y].AddUnit(&currentUnits[i]);
-			return;
-		}
-	}
-	throw new exception("This unit is not part of the unit list.");
+	Unit* currentUnit = this->GetUnitById(id);
+	int x = currentUnit->X();
+	int y = currentUnit->Y();
+	this->_tiles[x][y].AddUnit(currentUnit);
 }
 Unit* MapController::GetUnitById(int id)
 {
@@ -386,15 +363,8 @@ bool MapController::IsMovementAllowed(Unit* unit)
 }
 void MapController::RotateUnit(int id, RotationDirection rotationDirection)
 {
-	Unit* currentUnits = Units();
-	for (int i = 0; i < NumberOfUnits(); i++)
-	{
-		if (currentUnits[i].Id() == id)
-		{
-			currentUnits[i].Rotate(rotationDirection);
-		}
-	}
-	throw new exception("The unit list does not contain this unit.");
+	Unit* currentUnit = this->GetUnitById(id);
+	currentUnit->Rotate(rotationDirection);
 }
 void MapController::Units(Unit* units)
 {
