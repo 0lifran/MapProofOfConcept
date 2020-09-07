@@ -2,29 +2,26 @@
 #include "RenderData.h"
 #include "RenderDataArray.h"
 
-
 MapController::MapController(int width, int height, Tile** tiles)
 {
 	Tiles(width, height, tiles);
 }
 
+// Tile logic.
 void MapController::Tiles(int mapWidth, int mapHeight, Tile** tiles)
 {
 	MapWidth(mapWidth);
 	MapHeight(mapHeight);
 	this->_tiles = tiles;
 }
-
 Tile** MapController::Tiles()
 {
 	return this->_tiles;
 }
-
 Tile* MapController::Tiles(int x, int y)
 {
 	return &this->_tiles[x][y];
 }
-
 void MapController::MapWidth(int width)
 {
 	if (width < this->_MAXMAPWIDTH)
@@ -36,12 +33,10 @@ void MapController::MapWidth(int width)
 		this->_mapWidth = this->_MAXMAPWIDTH;
 	}
 }
-
 int MapController::MapWidth()
 {
 	return this->_mapWidth;
 }
-
 void MapController::MapHeight(int height)
 {
 	if (height < this->_MAXMAPHEIGHT)
@@ -53,23 +48,19 @@ void MapController::MapHeight(int height)
 		this->_mapHeight = this->_MAXMAPHEIGHT;
 	}
 }
-
 int MapController::MapHeight()
 {
 	return this->_mapHeight;
 }
-
 Tile* MapController::SpecificTileAt(int x, int y)
 {
 	return (this->Tiles())[x];;
 }
-
 void MapController::SpecificTileAt(Tile* tile, int x, int y)
 {
 	Tile** tempTiles = this->Tiles();
 	tempTiles[x][y] = *tile;
 }
-
 RenderDataArray* MapController::GetRenderData()
 {
 	int lengthX = MapWidth();
@@ -130,11 +121,10 @@ void MapController::RemoveItem(int id)
 		tiles[x, y]->TakeOutItem(id, tempI);
 		delete tempI;
 	}
-	else 
+	else
 	{
 		throw new exception();
 	}
-	
 }
 void MapController::PlaceItemOnTile(int id, int x, int y)
 {
@@ -166,6 +156,14 @@ void MapController::PushItemToMap(int id)
 	}
 	throw new exception("This item is not part of the item list.");
 }
+void MapController::Items(Item* items)
+{
+	this->_items = items;
+}
+Item* MapController::Items()
+{
+	return this->_items;
+}
 
 // Unit logic.
 void MapController::RemoveUnit(int id)
@@ -195,7 +193,6 @@ void MapController::RemoveUnit(int id)
 		throw new exception();
 	}
 }
-
 void MapController::PlaceUnitOnTile(int id, int x, int y)
 {
 	Unit* currentUnits = Units();
@@ -211,19 +208,16 @@ void MapController::PlaceUnitOnTile(int id, int x, int y)
 	}
 	throw new exception("This unit is not part of the unit list.");
 }
-
 int MapController::IncrementNumberOfUnits()
 {
 	this->_numberOfUnits++;
 	return this->NumberOfUnits();
 }
-
 int MapController::DecrementNumberOfUnits()
 {
 	this->_numberOfUnits--;
 	return this->NumberOfUnits();
 }
-
 void MapController::PushUnitToMap(int id)
 {
 	Unit* currentUnits = Units();
@@ -239,50 +233,157 @@ void MapController::PushUnitToMap(int id)
 	}
 	throw new exception("This unit is not part of the unit list.");
 }
-
+Unit* MapController::GetUnitById(int id)
+{
+	Unit* units = Units();
+	for (int i = 0; i < this->NumberOfUnits(); i++)
+	{
+		if (units[i].Id() == id)
+		{
+			return &units[i];
+		}
+	}
+	throw new exception("Unit not in list.");
+}
 void MapController::MoveUnit(int id)
 {
 	bool movementIsAllowed = false;
-	Unit* currentUnits = Units();
-	if (movementIsAllowed)
+	Unit* currentUnit = GetUnitById(id);
+	if (this->IsMovementAllowed(currentUnit))
 	{
-		for (int i = 0; i < NumberOfUnits(); i++)
-		{
-			if (currentUnits[i].Id() == id)
-			{
-				currentUnits[i].Move();
-			}
-		}
+		currentUnit->Move();
 	}
 }
-
 bool MapController::IsMovementAllowed(Unit* unit)
 {
 	int x = unit->X();
 	int y = unit->Y();
 	Direction unitDirection = unit->DirectionAngle();
 	Tile* unitTile = this->Tiles(x, y);
-	bool result = false;
+	Tile* targetTile = new Tile();
+	bool isAllowed = false;
+
 	switch (unitDirection)
 	{
 	case Direction::North:
-		// Must not be out of map bounds.
-		// The target tile must not be higher than +2.
-		// There must be no other unit standing on target tile.
 		if (y - 1 >= 0)
 		{
-			Tile* targetTile = this->Tiles(x, y - 1);
-			int unitHeight = unitTile->Height();
-			int targetHeight = targetTile->Height();
-			if (targetHeight - unitHeight >= 2)
-			{
-				result = false;
-			}
+			isAllowed = true;
+			targetTile = this->Tiles(x, y - 1);
+		}
+		else
+		{
+			isAllowed = false;
 		}
 		break;
+	case Direction::NorthEast:
+		if (y - 1 >= 0 && x + 1 <= this->MapWidth())
+		{
+			isAllowed = true;
+			targetTile = this->Tiles(x + 1, y - 1);
+		}
+		else
+		{
+			isAllowed = false;
+		}
+		break;
+	case Direction::East:
+		if (x + 1 <= this->MapWidth())
+		{
+			isAllowed = true;
+			targetTile = this->Tiles(x + 1, y);
+		}
+		else
+		{
+			isAllowed = false;
+		}
+		break;
+	case Direction::SouthEast:
+		if (y + 1 <= this->MapHeight() && x + 1 <= this->MapWidth())
+		{
+			isAllowed = true;
+			targetTile = this->Tiles(x + 1, y);
+		}
+		else
+		{
+			isAllowed = false;
+		}
+		break;
+	case Direction::South:
+		if (y + 1 <= this->MapHeight())
+		{
+			isAllowed = true;
+			targetTile = this->Tiles(x, y + 1);
+		}
+		else
+		{
+			isAllowed = false;
+		}
+		break;
+	case Direction::SouthWest:
+		if (x - 1 >= 0 && y + 1 <= this->MapHeight())
+		{
+			isAllowed = true;
+			targetTile = this->Tiles(x - 1, y + 1);
+		}
+		else
+		{
+			isAllowed = false;
+		}
+		break;
+	case Direction::West:
+		if (x - 1 >= 0)
+		{
+			isAllowed = true;
+			targetTile = this->Tiles(x - 1, y);
+		}
+		else
+		{
+			isAllowed = false;
+		}
+		break;
+	case Direction::NorthWest:
+		if (y - 1 >= 0 && x - 1 >= 0)
+		{
+			isAllowed = true;
+			targetTile = this->Tiles(x - 1, y - 1);
+		}
+		else
+		{
+			isAllowed = false;
+		}
+		break;
+	default:
+		throw new exception("Error during unit movement: The moving direction is unknown.");
 	}
-}
 
+	if (isAllowed)
+	{
+		int unitHeight = unitTile->Height();
+		int targetHeight = targetTile->Height();
+		if (targetHeight - unitHeight >= 2)
+		{
+			isAllowed = false;
+		}
+		else
+		{
+			isAllowed = true;
+		}
+	}
+
+	if (isAllowed)
+	{
+		if (targetTile->IsOccupiedByUnit())
+		{
+			isAllowed = false;
+		}
+		else
+		{
+			isAllowed = true;
+		}
+	}
+	return isAllowed;
+}
 void MapController::RotateUnit(int id, RotationDirection rotationDirection)
 {
 	Unit* currentUnits = Units();
@@ -295,32 +396,18 @@ void MapController::RotateUnit(int id, RotationDirection rotationDirection)
 	}
 	throw new exception("The unit list does not contain this unit.");
 }
-
-void MapController::Items(Item* items)
-{
-	this->_items = items;
-}
-
 void MapController::Units(Unit* units)
 {
 	this->_units = units;
 }
-
-Item* MapController::Items()
-{
-	return this->_items;
-}
-
 Unit* MapController::Units()
 {
 	return this->_units;
 }
-
 int MapController::NumberOfUnits()
 {
 	return this->_numberOfUnits;
 }
-
 void MapController::NumberOfUnits(int numberOfUnits)
 {
 	this->_numberOfUnits = numberOfUnits;

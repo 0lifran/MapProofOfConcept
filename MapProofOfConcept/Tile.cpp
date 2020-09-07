@@ -266,3 +266,12 @@ void Tile::RemoveUnitAtPosition(int positionAt)
 		}
 	}
 }
+
+void Tile::SetOccupied(bool state)
+{
+	this->_isOccupiedByUnit = state;
+}
+bool Tile::IsOccupiedByUnit()
+{
+	return this->_isOccupiedByUnit;
+}

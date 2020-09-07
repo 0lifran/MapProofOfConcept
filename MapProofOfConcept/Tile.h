@@ -50,6 +50,8 @@ public:
 	int DecrementNumberOfUnits();
 	Unit* GetUnitAtPosition(int positionAt);
 	void RemoveUnitAtPosition(int positionAt);
+	void SetOccupied(bool state);
+	bool IsOccupiedByUnit();
 
 private:
 	int _height;
@@ -59,5 +61,6 @@ private:
 	int _numberOfItems;
 	Unit* _units;
 	int _numberOfUnits;
+	bool _isOccupiedByUnit;
 };
 

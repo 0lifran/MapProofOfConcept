@@ -56,11 +56,7 @@ private:
 	void PushUnitToMap(int id);
 	int IncrementNumberOfUnits();
 	int DecrementNumberOfUnits();
-
+	Unit* GetUnitById(int id);
 	bool IsMovementAllowed(Unit* unit);
-
-	
-
-	
 };
 
