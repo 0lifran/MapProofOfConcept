@@ -2,6 +2,7 @@
 #include <string>
 #include "RotationDirection.h"
 #include "Direction.h"
+#include "IdManager.h"
 
 using namespace std;
 

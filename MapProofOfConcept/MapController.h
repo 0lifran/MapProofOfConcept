@@ -12,18 +12,18 @@ public:
 	void AddUnit(Unit* unit);
 
 private:
-	 bool _tileDataHasChanged;
-	 bool _itemDataHasChanged;
-	 bool _unitDataHasChanged;
+	 bool _tileDataHasChanged = true;
+	 bool _itemDataHasChanged = true;
+	 bool _unitDataHasChanged = true;
 	 const short _MAXMAPWIDTH = 128;
 	 const short _MAXMAPHEIGHT = 128;
 	 Tile** _tiles;
-	 int _mapWidth;
-	 int _mapHeight;
-	 int _numberOfItems;
+	 int _mapWidth = 16;
+	 int _mapHeight = 16;
+	 int _numberOfItems = 0;
 	 Item* _items;
 	 Unit* _units;
-	 int _numberOfUnits;
+	 int _numberOfUnits = 0;
 
 	RenderDataArray* GetTileRenderData();
 	RenderDataArray* GetItemRenderData();
@@ -81,6 +81,6 @@ private:
 	int DecrementNumberOfUnits();
 	Unit* GetUnitById(int id);
 	bool IsMovementAllowed(Unit* unit);
-	void AddToUnitRepository(Unit* unit);
+	void AddToUnitRepository(Unit unit);
 };
 

@@ -1,3 +1,4 @@
+#include "IdManager.h"
 #pragma once
 #include <string>
 

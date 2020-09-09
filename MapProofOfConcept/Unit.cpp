@@ -6,6 +6,7 @@ Unit::Unit(int x, int y, string name, string imagePath)
 	this->Y(y);
 	this->Name(name);
 	this->ImagePath(imagePath);
+	this->Id(IdManager::GetNewId());
 }
 
 Unit::Unit()
@@ -14,6 +15,7 @@ Unit::Unit()
 	this->Y(-1);
 	this->Name("None");
 	this->ImagePath("None");
+	this->Id(-1);
 }
 
 int Unit::X()

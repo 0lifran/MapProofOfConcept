@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="IdManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemType.h" />
     <ClInclude Include="MapController.h" />

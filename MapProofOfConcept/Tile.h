@@ -42,7 +42,7 @@ public:
 	// Unit data
 	Unit* Units();
 	void Units(Unit* unit);
-	void AddUnit(int x, int y, Unit* unit);
+	void AddUnit(int x, int y, Unit unit);
 	bool TakeOutUnit(int id, Unit* out);
 	int NumberOfUnits();
 	void NumberOfUnits(int numberOfUnits);
@@ -54,13 +54,13 @@ public:
 	bool IsOccupiedByUnit();
 
 private:
-	int _height;
+	int _height = 0;
 	string _path;
 	TileType _type;
 	Item* _items;
-	int _numberOfItems;
+	int _numberOfItems = 0;
 	Unit* _units;
-	int _numberOfUnits;
-	bool _isOccupiedByUnit;
+	int _numberOfUnits = 0;
+	bool _isOccupiedByUnit = false;
 };
 

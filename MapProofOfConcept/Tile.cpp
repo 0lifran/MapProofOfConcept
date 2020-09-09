@@ -183,21 +183,30 @@ void Tile::Units(Unit* units)
 {
 	this->_units = units;
 }
-void Tile::AddUnit(int x, int y, Unit* unit)
+void Tile::AddUnit(int x, int y, Unit unit)
 {
 	int currentNumberOfUnits = IncrementNumberOfUnits();
 	Unit* currentUnits = Units();
 	Unit* tempUnits = new Unit[currentNumberOfUnits];
-	for (int i = 0; i < currentNumberOfUnits; i++)
+	if (currentNumberOfUnits > 1)
 	{
-		if (i == 0)
+		for (int i = 0; i < currentNumberOfUnits; i++)
 		{
-			tempUnits[i] = *unit;
+			if (i == 0)
+			{
+				tempUnits[i] = unit;
+			}
+			else
+			{
+				tempUnits[i] = currentUnits[i - 1];
+			}
 		}
-		else
-		{
-			tempUnits[i] = currentUnits[i - 1];
-		}
+		this->Units(tempUnits);
+	}
+	else 
+	{
+		tempUnits[0] = unit;
+		this->Units(tempUnits);
 	}
 }
 

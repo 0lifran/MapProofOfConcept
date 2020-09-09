@@ -4,7 +4,7 @@ Item::Item(string name)
 {
 	Name(name);
 	ImagePath("Item.png");
-	Id(0);
+	Id(IdManager::GetNewId());
 }
 
 Item::Item()

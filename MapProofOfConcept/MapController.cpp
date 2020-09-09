@@ -34,7 +34,7 @@ void MapController::AddUnitsOnTilesToRepository()
 				Unit* unitsOnThisTile = curTiles[x][y].Units();
 				for (int i = 0; i < numberOfUnitsOnTile; i++)
 				{
-					this->AddToUnitRepository(&unitsOnThisTile[i]);
+					this->AddToUnitRepository(unitsOnThisTile[i]);
 				}
 			}
 		}
@@ -369,7 +369,7 @@ void MapController::PlaceUnitOnTile(int id, int x, int y)
 	Unit* currentUnit = this->GetUnitById(id);
 	currentUnit->X(x);
 	currentUnit->Y(y);
-	this->_tiles[x][y].AddUnit(x,y,currentUnit);
+	this->_tiles[x][y].AddUnit(x,y,*currentUnit);
 	SetUnitDataHasChanged(true);
 }
 int MapController::IncrementNumberOfUnits()
@@ -387,7 +387,7 @@ void MapController::PushUnitToMap(int id)
 	Unit* currentUnit = this->GetUnitById(id);
 	int x = currentUnit->X();
 	int y = currentUnit->Y();
-	this->_tiles[x][y].AddUnit(x,y,currentUnit);
+	this->_tiles[x][y].AddUnit(x,y,*currentUnit);
 	SetUnitDataHasChanged(true);
 }
 Unit* MapController::GetUnitById(int id)
@@ -567,11 +567,11 @@ void MapController::NumberOfUnits(int numberOfUnits)
 }
 void MapController::AddUnit(Unit* unit)
 {
-	this->AddToUnitRepository(unit);
+	this->AddToUnitRepository(*unit);
 	PushUnitToMap(unit->Id());
 }
 
-void MapController::AddToUnitRepository(Unit* unit)
+void MapController::AddToUnitRepository(Unit unit)
 {
 	IncrementNumberOfUnits();
 	Unit* tempUnits = new Unit[NumberOfUnits()]();
@@ -584,7 +584,7 @@ void MapController::AddToUnitRepository(Unit* unit)
 		}
 		else
 		{
-			tempUnits[i] = *unit;
+			tempUnits[i] = unit;
 		}
 	}
 
