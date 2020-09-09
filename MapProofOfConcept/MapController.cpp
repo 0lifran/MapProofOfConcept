@@ -63,6 +63,107 @@ void MapController::SpecificTileAt(Tile* tile, int x, int y)
 }
 RenderDataArray* MapController::GetRenderData()
 {
+	RenderDataArray* tileData;
+	RenderDataArray* itemData;
+	RenderDataArray* unitData;
+
+	if (this->TileDataHasChanged())
+	{
+		tileData = this->GetTileRenderData();
+		this->SetTileDataHasChanged(false);
+	}
+	else
+	{
+		RenderData emptyRenderData = RenderData{ 0,0,"" };
+		tileData = new RenderDataArray{ 0,  &emptyRenderData };
+	}
+
+	if (this->UnitDataHasChanged())
+	{
+		unitData = this->GetTileRenderData();
+		this->SetUnitDataHasChanged(false);
+	}
+	else
+	{
+		RenderData emptyRenderData = RenderData{ 0,0,"" };
+		unitData = new RenderDataArray{ 0,  &emptyRenderData };
+	}
+
+	if (this->ItemDataHasChanged())
+	{
+		itemData = this->GetTileRenderData();
+		this->SetItemDataHasChanged(false);
+	}
+	else
+	{
+		RenderData emptyRenderData = RenderData{ 0,0,"" };
+		itemData = new RenderDataArray{ 0,  &emptyRenderData };
+	}
+
+	int expectedLengthOfRenderData = tileData->Length + itemData->Length + unitData->Length;
+	RenderData* allRenderData = new RenderData[expectedLengthOfRenderData];
+	int cursorPos = 0;
+	for (int i = 0; i < tileData->Length; i++)
+	{
+		allRenderData[i] = tileData->Data[i];
+
+		if (i + 1 == tileData->Length)
+		{
+			cursorPos == i;
+		}
+	}
+
+	for (int i = 0; i < itemData->Length; i++)
+	{
+		allRenderData[cursorPos + i] = itemData->Data[i];
+		if (i + 1 == itemData->Length)
+		{
+			cursorPos == cursorPos + i;
+		}
+	}
+
+	for (int i = 0; i < unitData->Length; i++)
+	{
+		allRenderData[cursorPos + i] = unitData->Data[i];
+		if (i + 1 == unitData->Length)
+		{
+			cursorPos == cursorPos + i;
+		}
+	}
+	return new RenderDataArray
+	{ 
+		expectedLengthOfRenderData, 
+		allRenderData 
+	};
+}
+
+bool MapController::TileDataHasChanged()
+{
+	return this->_tileDataHasChanged;
+}
+void MapController::SetTileDataHasChanged(bool state)
+{
+	this->_tileDataHasChanged = state;
+}
+bool MapController::UnitDataHasChanged()
+{
+	return this->_unitDataHasChanged;
+}
+void MapController::SetUnitDataHasChanged(bool state)
+{
+	this->_unitDataHasChanged = state;
+}
+bool MapController::ItemDataHasChanged()
+{
+	return this->_itemDataHasChanged;
+}
+void MapController::SetItemDataHasChanged(bool state)
+{
+	this->_itemDataHasChanged = state;
+}
+
+RenderDataArray* MapController::GetTileRenderData()
+{
 	int lengthX = MapWidth();
 	int lengthY = MapHeight();
 	int lengthXY = lengthX * lengthY;
@@ -78,6 +179,28 @@ RenderDataArray* MapController::GetRenderData()
 		}
 	}
 	return new RenderDataArray{ lengthXY, renderingDataArray };
+}
+RenderDataArray* MapController::GetItemRenderData()
+{
+	int numberOfItems = this->NumberOfItems();
+	Item* items = Items();
+	RenderData* renderingDataArray = new RenderData[numberOfItems];
+	for (int i = 0; i < numberOfItems; i++)
+	{
+		renderingDataArray[i] = RenderData{ items[i].X(), items[i].Y(), items[i].ImagePath() };
+	}
+	return new RenderDataArray{ numberOfItems, renderingDataArray };
+}
+RenderDataArray* MapController::GetUnitRenderData()
+{
+	int numberOfUnits = this->NumberOfUnits();
+	Unit* units = Units();
+	RenderData* renderingDataArray = new RenderData[numberOfUnits];
+	for (int i = 0; i < numberOfUnits; i++)
+	{
+		renderingDataArray[i] = RenderData{ units[i].X(), units[i].Y(), units[i].ImagePath() };
+	}
+	return new RenderDataArray{ numberOfUnits, renderingDataArray };
 }
 
 // Item logic.

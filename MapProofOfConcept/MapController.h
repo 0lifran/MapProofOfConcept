@@ -11,6 +11,20 @@ public:
 	RenderDataArray* GetRenderData();
 
 private:
+	RenderDataArray* GetTileRenderData();
+	RenderDataArray* GetItemRenderData();
+	RenderDataArray* GetUnitRenderData();
+	bool TileDataHasChanged();
+	bool ItemDataHasChanged();
+	bool UnitDataHasChanged();
+	void SetTileDataHasChanged(bool state);
+	void SetItemDataHasChanged(bool state);
+	void SetUnitDataHasChanged(bool state);
+
+	bool _tileDataHasChanged;
+	bool _itemDataHasChanged;
+	bool _unitDataHasChanged;
+
 	// TileMap.
 	const short _MAXMAPWIDTH = 128;
 	const short _MAXMAPHEIGHT = 128;
