@@ -8,6 +8,9 @@ using namespace std;
 class Unit
 {
 public:
+	Unit();
+	Unit(int x, int y, string name, string imagePath);
+
 	int Id();
 	int X();
 	int Y();

@@ -9,11 +9,27 @@ class MapController
 public:
 	MapController(int width, int height, Tile** tiles);
 	RenderDataArray* GetRenderData();
+	void AddUnit(Unit* unit);
 
 private:
+	 bool _tileDataHasChanged;
+	 bool _itemDataHasChanged;
+	 bool _unitDataHasChanged;
+	 const short _MAXMAPWIDTH = 128;
+	 const short _MAXMAPHEIGHT = 128;
+	 Tile** _tiles;
+	 int _mapWidth;
+	 int _mapHeight;
+	 int _numberOfItems;
+	 Item* _items;
+	 Unit* _units;
+	 int _numberOfUnits;
+
 	RenderDataArray* GetTileRenderData();
 	RenderDataArray* GetItemRenderData();
 	RenderDataArray* GetUnitRenderData();
+
+	
 	bool TileDataHasChanged();
 	bool ItemDataHasChanged();
 	bool UnitDataHasChanged();
@@ -21,16 +37,8 @@ private:
 	void SetItemDataHasChanged(bool state);
 	void SetUnitDataHasChanged(bool state);
 
-	bool _tileDataHasChanged;
-	bool _itemDataHasChanged;
-	bool _unitDataHasChanged;
-
 	// TileMap.
-	const short _MAXMAPWIDTH = 128;
-	const short _MAXMAPHEIGHT = 128;
-	Tile** _tiles;
-	int _mapWidth;
-	int _mapHeight;
+	
 	void Tiles(int mapWidth, int mapHeight, Tile** tiles);
 	Tile** Tiles();
 	int MapWidth();
@@ -40,11 +48,12 @@ private:
 	Tile* SpecificTileAt(int x, int y);
 	void SpecificTileAt(Tile* tile, int x, int y);
 	Tile* Tiles(int x, int y);
+	void AddUnitsOnTilesToRepository();
+	void AddItemsOnTilesToRepository();
 
 
 	// Item logic.
-	int _numberOfItems;
-	Item* _items;
+	
 	Item* Items();
 	void Items(Item* items);
 	void RemoveItem(int id);
@@ -54,11 +63,11 @@ private:
 	void NumberOfItems(int numberOfItems);
 	int IncrementNumberOfItems();
 	int DecrementNumberOfItems();
+	void AddToItemRepository(Item* item);
 
 
 	// Unit logic.
-	Unit* _units;
-	int _numberOfUnits;
+	
 	Unit* Units();
 	void Units(Unit* units);
 	void RemoveUnit(int id);
@@ -72,5 +81,6 @@ private:
 	int DecrementNumberOfUnits();
 	Unit* GetUnitById(int id);
 	bool IsMovementAllowed(Unit* unit);
+	void AddToUnitRepository(Unit* unit);
 };
 

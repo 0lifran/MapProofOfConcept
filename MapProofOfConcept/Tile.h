@@ -42,7 +42,7 @@ public:
 	// Unit data
 	Unit* Units();
 	void Units(Unit* unit);
-	void AddUnit(Unit* unit);
+	void AddUnit(int x, int y, Unit* unit);
 	bool TakeOutUnit(int id, Unit* out);
 	int NumberOfUnits();
 	void NumberOfUnits(int numberOfUnits);

@@ -1,5 +1,21 @@
 #include "Unit.h"
 
+Unit::Unit(int x, int y, string name, string imagePath)
+{
+	this->X(x);
+	this->Y(y);
+	this->Name(name);
+	this->ImagePath(imagePath);
+}
+
+Unit::Unit()
+{
+	this->X(-1);
+	this->Y(-1);
+	this->Name("None");
+	this->ImagePath("None");
+}
+
 int Unit::X()
 {
 	return this->_x;

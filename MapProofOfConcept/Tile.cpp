@@ -183,7 +183,7 @@ void Tile::Units(Unit* units)
 {
 	this->_units = units;
 }
-void Tile::AddUnit(Unit* unit)
+void Tile::AddUnit(int x, int y, Unit* unit)
 {
 	int currentNumberOfUnits = IncrementNumberOfUnits();
 	Unit* currentUnits = Units();

@@ -13,7 +13,54 @@ void MapController::Tiles(int mapWidth, int mapHeight, Tile** tiles)
 	MapWidth(mapWidth);
 	MapHeight(mapHeight);
 	this->_tiles = tiles;
+
+	this->AddUnitsOnTilesToRepository();
+	
+	SetTileDataHasChanged(true);
+	SetItemDataHasChanged(true);
+	SetUnitDataHasChanged(true);
 }
+
+void MapController::AddUnitsOnTilesToRepository()
+{
+	Tile** curTiles = Tiles();
+	for (int x = 0; x < MapWidth(); x++)
+	{
+		for (int y = 0; y < MapHeight(); y++)
+		{
+			int numberOfUnitsOnTile = curTiles[x][y].NumberOfUnits();
+			if (numberOfUnitsOnTile > 0)
+			{
+				Unit* unitsOnThisTile = curTiles[x][y].Units();
+				for (int i = 0; i < numberOfUnitsOnTile; i++)
+				{
+					this->AddToUnitRepository(&unitsOnThisTile[i]);
+				}
+			}
+		}
+	}
+}
+
+void MapController::AddItemsOnTilesToRepository()
+{
+	Tile** curTiles = Tiles();
+	for (int x = 0; x < MapWidth(); x++)
+	{
+		for (int y = 0; y < MapHeight(); y++)
+		{
+			int numberOfItemsOnTile = curTiles[x][y].NumberOfUnits();
+			if (numberOfItemsOnTile > 0)
+			{
+				Item* itemsOnThisTile = curTiles[x][y].Items();
+				for (int i = 0; i < numberOfItemsOnTile; i++)
+				{
+					this->AddToItemRepository(&itemsOnThisTile[i]);
+				}
+			}
+		}
+	}
+}
+
 Tile** MapController::Tiles()
 {
 	return this->_tiles;
@@ -60,6 +107,7 @@ void MapController::SpecificTileAt(Tile* tile, int x, int y)
 {
 	Tile** tempTiles = this->Tiles();
 	tempTiles[x][y] = *tile;
+	SetTileDataHasChanged(true);
 }
 RenderDataArray* MapController::GetRenderData()
 {
@@ -131,9 +179,9 @@ RenderDataArray* MapController::GetRenderData()
 		}
 	}
 	return new RenderDataArray
-	{ 
-		expectedLengthOfRenderData, 
-		allRenderData 
+	{
+		expectedLengthOfRenderData,
+		allRenderData
 	};
 }
 
@@ -242,6 +290,7 @@ void MapController::RemoveItem(int id)
 		Tile** tiles = Tiles();
 		Item* tempI = new Item();;
 		tiles[x, y]->TakeOutItem(id, tempI);
+		SetItemDataHasChanged(true);
 		delete tempI;
 	}
 	else
@@ -259,6 +308,7 @@ void MapController::PlaceItemOnTile(int id, int x, int y)
 			currentItems[i].X(x);
 			currentItems[i].Y(y);
 			this->_tiles[x][y].AddItem(&currentItems[i]);
+			SetItemDataHasChanged(true);
 			return;
 		}
 	}
@@ -274,6 +324,8 @@ void MapController::PushItemToMap(int id)
 			int x = currentItems[i].X();
 			int y = currentItems[i].Y();
 			this->_tiles[x][y].AddItem(&currentItems[i]);
+			SetItemDataHasChanged(true);
+
 			return;
 		}
 	}
@@ -282,6 +334,8 @@ void MapController::PushItemToMap(int id)
 void MapController::Items(Item* items)
 {
 	this->_items = items;
+	SetItemDataHasChanged(true);
+
 }
 Item* MapController::Items()
 {
@@ -300,8 +354,9 @@ void MapController::RemoveUnit(int id)
 	if (x != -1 && y != -1)
 	{
 		Tile** tiles = Tiles();
-		Unit* tempU = new Unit();;
+		Unit* tempU = new Unit();
 		tiles[x, y]->TakeOutUnit(id, tempU);
+		SetUnitDataHasChanged(true);
 		delete tempU;
 	}
 	else
@@ -314,7 +369,8 @@ void MapController::PlaceUnitOnTile(int id, int x, int y)
 	Unit* currentUnit = this->GetUnitById(id);
 	currentUnit->X(x);
 	currentUnit->Y(y);
-	this->_tiles[x][y].AddUnit(currentUnit);
+	this->_tiles[x][y].AddUnit(x,y,currentUnit);
+	SetUnitDataHasChanged(true);
 }
 int MapController::IncrementNumberOfUnits()
 {
@@ -331,7 +387,8 @@ void MapController::PushUnitToMap(int id)
 	Unit* currentUnit = this->GetUnitById(id);
 	int x = currentUnit->X();
 	int y = currentUnit->Y();
-	this->_tiles[x][y].AddUnit(currentUnit);
+	this->_tiles[x][y].AddUnit(x,y,currentUnit);
+	SetUnitDataHasChanged(true);
 }
 Unit* MapController::GetUnitById(int id)
 {
@@ -352,6 +409,7 @@ void MapController::MoveUnit(int id)
 	if (this->IsMovementAllowed(currentUnit))
 	{
 		currentUnit->Move();
+		SetUnitDataHasChanged(true);
 	}
 }
 bool MapController::IsMovementAllowed(Unit* unit)
@@ -488,10 +546,12 @@ void MapController::RotateUnit(int id, RotationDirection rotationDirection)
 {
 	Unit* currentUnit = this->GetUnitById(id);
 	currentUnit->Rotate(rotationDirection);
+	SetUnitDataHasChanged(true);
 }
 void MapController::Units(Unit* units)
 {
 	this->_units = units;
+	SetUnitDataHasChanged(true);
 }
 Unit* MapController::Units()
 {
@@ -504,4 +564,51 @@ int MapController::NumberOfUnits()
 void MapController::NumberOfUnits(int numberOfUnits)
 {
 	this->_numberOfUnits = numberOfUnits;
+}
+void MapController::AddUnit(Unit* unit)
+{
+	this->AddToUnitRepository(unit);
+	PushUnitToMap(unit->Id());
+}
+
+void MapController::AddToUnitRepository(Unit* unit)
+{
+	IncrementNumberOfUnits();
+	Unit* tempUnits = new Unit[NumberOfUnits()]();
+	Unit* currentUnits = Units();
+	for (int i = 0; i < NumberOfUnits(); i++)
+	{
+		if (i != NumberOfUnits() - 1)
+		{
+			tempUnits[i] = currentUnits[i];
+		}
+		else
+		{
+			tempUnits[i] = *unit;
+		}
+	}
+
+	Units(tempUnits);
+	delete[]currentUnits;
+}
+
+void MapController::AddToItemRepository(Item* item)
+{
+	IncrementNumberOfItems();
+	Item* tempItems = new Item[NumberOfItems()]();
+	Item* currentItems = Items();
+	for (int i = 0; i < NumberOfItems(); i++)
+	{
+		if (i != NumberOfItems() - 1)
+		{
+			tempItems[i] = currentItems[i];
+		}
+		else
+		{
+			tempItems[i] = *item;
+		}
+	}
+
+	Items(tempItems);
+	delete[]currentItems;
 }

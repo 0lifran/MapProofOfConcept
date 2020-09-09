@@ -9,5 +9,5 @@ using namespace std;
 
 int main()
 {
-	Tile** tiles = new Tile * [128]{ };
+	// test code.
 }
