@@ -1,10 +1,11 @@
 #include "Item.h"
 #include "IdManager.h"
 
-Item::Item(string name)
+Item::Item(string name, ItemType type)
 {
 	Name(name);
 	ImagePath("Item.png");
+	Type(type);
 
 	IdManager idHandler = *new IdManager();
 	Id(idHandler.GetNewId());
@@ -15,6 +16,7 @@ Item::Item()
 	Id(-1);
 	Name("None");
 	ImagePath("None.png");
+	Type(ItemType::None);
 }
 
 string Item::Name()
@@ -62,4 +64,14 @@ void Item::X(int x)
 void Item::Y(int y)
 {
 	this->_y = y;
+}
+
+ItemType Item::Type()
+{
+	return this->_type;
+}
+
+void Item::Type(ItemType type)
+{
+	this->_type = type;
 }

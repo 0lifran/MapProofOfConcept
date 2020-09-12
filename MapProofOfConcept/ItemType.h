@@ -2,6 +2,7 @@
 enum class ItemType
 {
 	None,
-	Common
+	Common,
+	Container
 };
 

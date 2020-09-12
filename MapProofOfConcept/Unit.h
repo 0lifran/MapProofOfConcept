@@ -28,9 +28,28 @@ public:
 	string ImagePath();
 	void ImagePath(string path);
 
+	
+
 private:
 	void Id(int id);
 	void DirectionAngle(Direction direction);
+
+	Item* Head();
+	void Head(Item* item);
+	Item* LeftHand();
+	void LeftHand(Item* item);
+	Item* RightHand();
+	void  RightHand(Item* item);
+	Item* Torso();
+	void Torso(Item* item);
+	Item* Back();
+	void Back(Item* item);
+	Item* Legs();
+	void Legs(Item* item);
+	Item* LeftFoot();
+	void LeftFoot(Item* item);
+	Item* RightFoot();
+	void  RightFoot(Item* item);
 
 	int _id;
 	int _x;
@@ -38,5 +57,14 @@ private:
 	string _name;
 	Direction _directionAngle;
 	string _imagePath;
+
+	Item* _head;
+	Item* _leftHand;
+	Item* _rightHand;
+	Item* _torso;
+	Item* _back;
+	Item* _legs;
+	Item* _leftFoot;
+	Item* _rightFoot;
 };
 

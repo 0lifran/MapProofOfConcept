@@ -414,8 +414,6 @@ void MapController::MoveUnit(int id)
 		tempTile->TakeOutUnit(currentUnit->Id(), currentUnit);
 		currentUnit->Move();
 
-		cout << to_string(currentUnit->X()) + to_string(currentUnit->Y()) << endl;
-
 		PlaceUnitOnTile(currentUnit->Id(), currentUnit->X(), currentUnit->Y());
 		SetUnitDataHasChanged(true);
 	}
@@ -468,7 +466,7 @@ bool MapController::IsMovementAllowed(Unit* unit)
 		if (y + 1 < this->MapHeight() && x + 1 < this->MapWidth())
 		{
 			isAllowed = true;
-			targetTile = this->Tiles(x + 1, y);
+			targetTile = this->Tiles(x + 1, y + 1);
 		}
 		else
 		{
@@ -554,7 +552,6 @@ void MapController::RotateUnit(int id, RotationDirection rotationDirection)
 {
 	Unit* currentUnit = this->GetUnitById(id);
 	currentUnit->Rotate(rotationDirection);
-	cout << to_string((int)rotationDirection);
 	SetUnitDataHasChanged(true);
 }
 void MapController::Units(Unit* units)

@@ -22,14 +22,14 @@ int main()
 		}
 	}
 
-	Item item1 = *new Item("Item_1");
-	Item item2 = *new Item("Item_1");
+	Item item1 = *new Item("Item_1", ItemType::Common);
+	Item item2 = *new Item("Item_2", ItemType::Common);
 	Unit unit1 = *new Unit(1, 1, "Unit_1", "Unit.png");
 	Unit unit2 = *new Unit(1, 2, "Unit_2", "Unit.png");
 
-	tiles[5][5] = *new Tile(TileType::Mud, 0);
-	tiles[5][6] = *new Tile(TileType::Snow, 0);
-	tiles[5][7] = *new Tile(TileType::Water, 0);
+	tiles[5][5] = *new Tile(TileType::Mud, 1);
+	tiles[5][6] = *new Tile(TileType::Snow, 3);
+	tiles[5][7] = *new Tile(TileType::Water, 2);
 
 	tiles[1][1].AddUnit(1, 1, unit1);
 	tiles[8][8].AddItem(&item1);
@@ -38,6 +38,8 @@ int main()
 	mapController->AddUnit(&unit2);
 
 	char inputKey = ' ';
+
+	bool toggle = false;
 	while (inputKey != '0')
 	{
 		system("CLS");
@@ -83,20 +85,22 @@ int main()
 			cout << endl;
 		}
 
-		cout << tiles[1][1].NumberOfUnits();
+		cout << "(w) Move (a) Rotate left (d) Rotate right (x) Swap unit selection (0) Exit" << endl << endl;
 		cout << "Input: ";
 		cin >> inputKey;
 		switch (inputKey)
 		{
 		case 'w':
-			mapController->MoveUnit(3);
+			mapController->MoveUnit(toggle ? 3 : 4);
 			break;
 		case 'a':
-			mapController->RotateUnit(3, RotationDirection::Left);
+			mapController->RotateUnit(toggle ? 3 : 4, RotationDirection::Left);
 			break;
 		case 'd':
-			mapController->RotateUnit(3, RotationDirection::Right);
+			mapController->RotateUnit(toggle ? 3 : 4, RotationDirection::Right);
 			break;
+		case 'x':
+			toggle = !toggle;
 		default:
 			break;
 		}
