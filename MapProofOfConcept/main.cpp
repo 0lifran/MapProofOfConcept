@@ -10,8 +10,8 @@ using namespace std;
 
 int main()
 {
-	Printer _printer = *new Printer();
 	// test code.
+	Printer _printer = *new Printer();
 	Tile** tiles = new Tile * [25];
 	for (int i = 0; i < 25; i++)
 	{
@@ -37,47 +37,68 @@ int main()
 	MapController* mapController = new MapController(25, 25, tiles);
 	mapController->AddUnit(&unit2);
 
-	for (int x = 0; x < 25; x++)
+	char inputKey = ' ';
+	while (inputKey != '0')
 	{
+		system("CLS");
 		for (int y = 0; y < 25; y++)
 		{
-			if (tiles[x][y].NumberOfItems() == 0 && tiles[x][y].NumberOfUnits() == 0)
+			for (int x = 0; x < 25; x++)
 			{
-				if (tiles[x][y].Type() == TileType::Grass)
+				if (tiles[x][y].NumberOfItems() == 0 && tiles[x][y].NumberOfUnits() == 0)
 				{
-					cout << _printer.formatString("#", TerminalColor::Green) << " ";
-				}
-				else if (tiles[x][y].Type() == TileType::Mud)
-				{
-					cout << _printer.formatString("#", TerminalColor::Yellow) << " ";
-				}
-				else if (tiles[x][y].Type() == TileType::Water)
-				{
-					cout << _printer.formatString("#", TerminalColor::Blue) << " ";
-				}
-				else if (tiles[x][y].Type() == TileType::Snow)
-				{
-					cout << _printer.formatString("#", TerminalColor::White) << " ";
+					if (tiles[x][y].Type() == TileType::Grass)
+					{
+						cout << _printer.formatString("#", TerminalColor::Green) << " ";
+					}
+					else if (tiles[x][y].Type() == TileType::Mud)
+					{
+						cout << _printer.formatString("#", TerminalColor::Yellow) << " ";
+					}
+					else if (tiles[x][y].Type() == TileType::Water)
+					{
+						cout << _printer.formatString("#", TerminalColor::Blue) << " ";
+					}
+					else if (tiles[x][y].Type() == TileType::Snow)
+					{
+						cout << _printer.formatString("#", TerminalColor::White) << " ";
+					}
+					else
+					{
+						cout << "?" << " ";
+					}
 				}
 				else
 				{
-					cout << "?" << " ";
+					if (tiles[x][y].NumberOfUnits() > 0)
+					{
+						cout << _printer.formatString("U", TerminalColor::BrightWhite) << " ";
+					}
+					else
+					{
+						cout << _printer.formatString("*", TerminalColor::BrightWhite) << " ";
+					}
 				}
 			}
-			else
-			{
-				if (tiles[x][y].NumberOfUnits() > 0)
-				{
-					cout << _printer.formatString("U", TerminalColor::BrightWhite) << " ";
-				}
-				else
-				{
-					cout << _printer.formatString("*", TerminalColor::BrightWhite) << " ";
-				}
-			}
+			cout << endl;
 		}
-		cout << endl;
-	}
 
-	cout << "Success";
+		cout << tiles[1][1].NumberOfUnits();
+		cout << "Input: ";
+		cin >> inputKey;
+		switch (inputKey)
+		{
+		case 'w':
+			mapController->MoveUnit(3);
+			break;
+		case 'a':
+			mapController->RotateUnit(3, RotationDirection::Left);
+			break;
+		case 'd':
+			mapController->RotateUnit(3, RotationDirection::Right);
+			break;
+		default:
+			break;
+		}
+	}
 }

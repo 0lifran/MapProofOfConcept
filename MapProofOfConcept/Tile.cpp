@@ -192,6 +192,7 @@ void Tile::Units(Unit* units)
 void Tile::AddUnit(int x, int y, Unit unit)
 {
 	int currentNumberOfUnits = IncrementNumberOfUnits();
+	SetOccupied(true);
 	Unit* currentUnits = Units();
 	Unit* tempUnits = new Unit[currentNumberOfUnits];
 	if (currentNumberOfUnits > 1)
@@ -222,7 +223,7 @@ bool Tile::TakeOutUnit(int id, Unit* out)
 	int positionAt = -1;
 	for (int i = 0; i < NumberOfUnits(); i++)
 	{
-		if (tempUnits->Id() == id)
+		if (tempUnits[i].Id() == id)
 		{
 			positionAt = i;
 			Unit* result = GetUnitAtPosition(positionAt);
@@ -259,15 +260,16 @@ int Tile::DecrementNumberOfUnits()
 Unit* Tile::GetUnitAtPosition(int positionAt)
 {
 	Unit* result = &this->_units[positionAt];
-	RemoveUnitAtPosition(positionAt);
 	return result;
 }
 
 void Tile::RemoveUnitAtPosition(int positionAt)
 {
-	int numberOfUnits = DecrementNumberOfUnits();
-	Unit* tempUnits = new Unit[numberOfUnits];
 	Unit* currentUnits = Units();
+	currentUnits[positionAt] = *new Unit();
+	int numberOfUnits = DecrementNumberOfUnits();
+	SetOccupied(false);
+	Unit* tempUnits = new Unit[numberOfUnits];
 
 	for (int i = 0; i < numberOfUnits; i++)
 	{

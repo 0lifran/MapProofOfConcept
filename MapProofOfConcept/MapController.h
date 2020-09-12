@@ -10,6 +10,8 @@ public:
 	MapController(int width, int height, Tile** tiles);
 	RenderDataArray* GetRenderData();
 	void AddUnit(Unit* unit);
+	void MoveUnit(int id);
+	void RotateUnit(int id, RotationDirection rotationDirection);
 
 private:
 	 bool _tileDataHasChanged = true;
@@ -72,8 +74,7 @@ private:
 	void Units(Unit* units);
 	void RemoveUnit(int id);
 	void PlaceUnitOnTile(int id, int x, int y);
-	void MoveUnit(int id);
-	void RotateUnit(int id, RotationDirection rotationDirection);
+	
 	int NumberOfUnits();
 	void NumberOfUnits(int numberOfUnits);
 	void PushUnitToMap(int id);

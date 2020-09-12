@@ -1,6 +1,7 @@
 #include "MapController.h"
 #include "RenderData.h"
 #include "RenderDataArray.h"
+#include <iostream>
 
 MapController::MapController(int width, int height, Tile** tiles)
 {
@@ -101,7 +102,8 @@ int MapController::MapHeight()
 }
 Tile* MapController::SpecificTileAt(int x, int y)
 {
-	return (this->Tiles())[x];;
+	Tile* specificTile = &this->Tiles()[x][y];
+	return specificTile;
 }
 void MapController::SpecificTileAt(Tile* tile, int x, int y)
 {
@@ -408,7 +410,13 @@ void MapController::MoveUnit(int id)
 	Unit* currentUnit = GetUnitById(id);
 	if (this->IsMovementAllowed(currentUnit))
 	{
+		Tile * tempTile = SpecificTileAt(currentUnit->X(), currentUnit->Y());
+		tempTile->TakeOutUnit(currentUnit->Id(), currentUnit);
 		currentUnit->Move();
+
+		cout << to_string(currentUnit->X()) + to_string(currentUnit->Y()) << endl;
+
+		PlaceUnitOnTile(currentUnit->Id(), currentUnit->X(), currentUnit->Y());
 		SetUnitDataHasChanged(true);
 	}
 }
@@ -435,7 +443,7 @@ bool MapController::IsMovementAllowed(Unit* unit)
 		}
 		break;
 	case Direction::NorthEast:
-		if (y - 1 >= 0 && x + 1 <= this->MapWidth())
+		if (y - 1 >= 0 && x + 1 < this->MapWidth())
 		{
 			isAllowed = true;
 			targetTile = this->Tiles(x + 1, y - 1);
@@ -446,7 +454,7 @@ bool MapController::IsMovementAllowed(Unit* unit)
 		}
 		break;
 	case Direction::East:
-		if (x + 1 <= this->MapWidth())
+		if (x + 1 < this->MapWidth())
 		{
 			isAllowed = true;
 			targetTile = this->Tiles(x + 1, y);
@@ -457,7 +465,7 @@ bool MapController::IsMovementAllowed(Unit* unit)
 		}
 		break;
 	case Direction::SouthEast:
-		if (y + 1 <= this->MapHeight() && x + 1 <= this->MapWidth())
+		if (y + 1 < this->MapHeight() && x + 1 < this->MapWidth())
 		{
 			isAllowed = true;
 			targetTile = this->Tiles(x + 1, y);
@@ -468,7 +476,7 @@ bool MapController::IsMovementAllowed(Unit* unit)
 		}
 		break;
 	case Direction::South:
-		if (y + 1 <= this->MapHeight())
+		if (y + 1 < this->MapHeight())
 		{
 			isAllowed = true;
 			targetTile = this->Tiles(x, y + 1);
@@ -479,7 +487,7 @@ bool MapController::IsMovementAllowed(Unit* unit)
 		}
 		break;
 	case Direction::SouthWest:
-		if (x - 1 >= 0 && y + 1 <= this->MapHeight())
+		if (x - 1 >= 0 && y + 1 < this->MapHeight())
 		{
 			isAllowed = true;
 			targetTile = this->Tiles(x - 1, y + 1);
@@ -546,6 +554,7 @@ void MapController::RotateUnit(int id, RotationDirection rotationDirection)
 {
 	Unit* currentUnit = this->GetUnitById(id);
 	currentUnit->Rotate(rotationDirection);
+	cout << to_string((int)rotationDirection);
 	SetUnitDataHasChanged(true);
 }
 void MapController::Units(Unit* units)

@@ -9,6 +9,7 @@ Unit::Unit(int x, int y, string name, string imagePath)
 	this->ImagePath(imagePath);
 	IdManager idHandler = *new IdManager();
 	this->Id(idHandler.GetNewId());
+	this->DirectionAngle(Direction::South);
 }
 
 Unit::Unit()
@@ -18,6 +19,7 @@ Unit::Unit()
 	this->Name("None");
 	this->ImagePath("None");
 	this->Id(-1);
+	this->DirectionAngle(Direction::None);
 }
 
 int Unit::X()
