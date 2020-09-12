@@ -1,8 +1,9 @@
 class IdManager
 {
 public:
-	static int _idCounter;
 	IdManager();
 	int GetNewId();
+private:
+	static int IdCounter;
 	void IncrementIdCounter();
 };
