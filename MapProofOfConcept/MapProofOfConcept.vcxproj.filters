@@ -42,6 +42,9 @@
     <ClCompile Include="RotationDirection.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="IdManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">

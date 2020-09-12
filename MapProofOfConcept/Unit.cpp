@@ -1,4 +1,5 @@
 #include "Unit.h"
+#include "IdManager.h"
 
 Unit::Unit(int x, int y, string name, string imagePath)
 {
@@ -6,7 +7,8 @@ Unit::Unit(int x, int y, string name, string imagePath)
 	this->Y(y);
 	this->Name(name);
 	this->ImagePath(imagePath);
-	this->Id(IdManager::GetNewId());
+	IdManager idHandler = *new IdManager();
+	this->Id(idHandler.GetNewId());
 }
 
 Unit::Unit()

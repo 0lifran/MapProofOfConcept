@@ -1,9 +1,8 @@
-namespace IdManager
+class IdManager
 {
-	int idCounter = 0;
-	int GetNewId()
-	{
-		idCounter++;
-		return idCounter;
-	}
-}
+public:
+	static int _idCounter;
+	IdManager();
+	int GetNewId();
+	void IncrementIdCounter();
+};

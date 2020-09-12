@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IdManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemType.cpp" />
     <ClCompile Include="main.cpp" />

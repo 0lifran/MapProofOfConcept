@@ -1,10 +1,13 @@
 #include "Item.h"
+#include "IdManager.h"
 
 Item::Item(string name)
 {
 	Name(name);
 	ImagePath("Item.png");
-	Id(IdManager::GetNewId());
+
+	IdManager idHandler = *new IdManager();
+	Id(idHandler.GetNewId());
 }
 
 Item::Item()
