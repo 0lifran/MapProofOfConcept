@@ -2,5 +2,7 @@ enum class TileType
 {
 	None,
 	Grass,
-	Mud
+	Mud,
+	Water,
+	Snow
 };

@@ -144,6 +144,7 @@
     <ClCompile Include="ItemType.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapController.cpp" />
+    <ClCompile Include="Printer.cpp" />
     <ClCompile Include="RenderData.cpp" />
     <ClCompile Include="RenderDataArray.cpp" />
     <ClCompile Include="RotationDirection.h" />
@@ -156,8 +157,10 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemType.h" />
     <ClInclude Include="MapController.h" />
+    <ClInclude Include="Printer.h" />
     <ClInclude Include="RenderData.h" />
     <ClInclude Include="RenderDataArray.h" />
+    <ClInclude Include="TerminalColor.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileType.h" />
     <ClInclude Include="Unit.h" />
