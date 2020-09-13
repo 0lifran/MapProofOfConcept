@@ -90,7 +90,7 @@ int main()
 			cout << endl;
 		}
 
-		cout << "(w) Move (a) Rotate left (d) Rotate right (x) Swap unit selection (0) Exit" << endl << endl;
+		cout << "(w) Move (a) Rotate left (d) Rotate right (x) Swap unit selection (g) Take item on top on this tile (0) Exit" << endl << endl;
 		cout << "Input: ";
 		cin >> inputKey;
 		switch (inputKey)
@@ -103,6 +103,9 @@ int main()
 			break;
 		case 'd':
 			mapController->RotateUnit(toggle ? 3 : 4, RotationDirection::Right);
+			break;
+		case 'g':
+
 			break;
 		case 'x':
 			toggle = !toggle;

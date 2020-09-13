@@ -55,7 +55,7 @@ void MapController::AddItemsOnTilesToRepository()
 				Item* itemsOnThisTile = curTiles[x][y].Items();
 				for (int i = 0; i < numberOfItemsOnTile; i++)
 				{
-					this->AddToItemRepository(&itemsOnThisTile[i]);
+					this->AddItem(&itemsOnThisTile[i]);
 				}
 			}
 		}
@@ -598,7 +598,7 @@ void MapController::AddToUnitRepository(Unit unit)
 	delete[]currentUnits;
 }
 
-void MapController::AddToItemRepository(Item* item)
+void MapController::AddItem(Item* item)
 {
 	IncrementNumberOfItems();
 	Item* tempItems = new Item[NumberOfItems()]();

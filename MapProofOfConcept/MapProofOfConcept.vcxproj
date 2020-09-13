@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="IdManager.cpp" />
+    <ClCompile Include="InventoryController.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="ItemType.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="IdManager.h" />
+    <ClInclude Include="InventoryController.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="ItemType.h" />
@@ -168,6 +170,7 @@
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileType.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitBodyPart.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

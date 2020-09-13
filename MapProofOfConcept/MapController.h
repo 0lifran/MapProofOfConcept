@@ -56,16 +56,16 @@ private:
 
 	// Item logic.
 	
+	void PlaceItemOnTile(int id, int x, int y);
+	void PushItemToMap(int id);
 	Item* Items();
 	void Items(Item* items);
 	void RemoveItem(int id);
-	void PlaceItemOnTile(int id, int x, int y);
-	void PushItemToMap(int id);
 	int NumberOfItems();
 	void NumberOfItems(int numberOfItems);
 	int IncrementNumberOfItems();
 	int DecrementNumberOfItems();
-	void AddToItemRepository(Item* item);
+	void AddItem(Item* item);
 
 
 	// Unit logic.

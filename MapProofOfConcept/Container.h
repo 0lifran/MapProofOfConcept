@@ -7,11 +7,14 @@ class Container : public Item
 public:
 	Container(string name, ItemType type, int capacity);
 
+	bool AddItem(Item* item);
+	bool TakeOutItem(int id, Item* out);
+
+private:
 	int Capacity();
 	void Capacity(int capacity);
-
+	bool EnoughSpaceLeft();
 	ItemManager ItemHandler;
-private:
 	int _capacity;
 };
 
