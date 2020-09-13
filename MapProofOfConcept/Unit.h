@@ -2,6 +2,7 @@
 #include <string>
 #include "RotationDirection.h"
 #include "Direction.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -28,28 +29,26 @@ public:
 	string ImagePath();
 	void ImagePath(string path);
 
-	
-
-private:
-	void Id(int id);
-	void DirectionAngle(Direction direction);
-
 	Item* Head();
 	void Head(Item* item);
 	Item* LeftHand();
 	void LeftHand(Item* item);
 	Item* RightHand();
 	void  RightHand(Item* item);
+	Item* Hands();
+	void Hands(Item* item);
 	Item* Torso();
 	void Torso(Item* item);
 	Item* Back();
 	void Back(Item* item);
 	Item* Legs();
 	void Legs(Item* item);
-	Item* LeftFoot();
-	void LeftFoot(Item* item);
-	Item* RightFoot();
-	void  RightFoot(Item* item);
+	Item* Feet();
+	void Feet(Item* item);
+
+private:
+	void Id(int id);
+	void DirectionAngle(Direction direction);
 
 	int _id;
 	int _x;
@@ -61,10 +60,11 @@ private:
 	Item* _head;
 	Item* _leftHand;
 	Item* _rightHand;
+	Item* _hands;
 	Item* _torso;
 	Item* _back;
 	Item* _legs;
-	Item* _leftFoot;
-	Item* _rightFoot;
+	Item* _feet;
+
 };
 

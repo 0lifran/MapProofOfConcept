@@ -47,11 +47,17 @@ void Tile::ImagePath(TileType type)
 	case TileType::Grass:
 		ImagePath("Grass.png");
 		break;
+	case TileType::WildGrass:
+		ImagePath("WildGrass.png");
+		break;
 	case TileType::Mud:
 		ImagePath("Mud.png");
 		break;
 	case TileType::Water:
 		ImagePath("Water.png");
+		break;
+	case TileType::DeepWater:
+		ImagePath("DeepWater.png");
 		break;
 	case TileType::Snow:
 		ImagePath("Snow.png");

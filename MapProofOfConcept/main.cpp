@@ -10,13 +10,15 @@ using namespace std;
 
 int main()
 {
+	int mapWidth = 10;
+	int mapHeight = 10;
 	// test code.
 	Printer _printer = *new Printer();
-	Tile** tiles = new Tile * [25];
-	for (int i = 0; i < 25; i++)
+	Tile** tiles = new Tile * [mapWidth];
+	for (int i = 0; i < mapWidth; i++)
 	{
-		tiles[i] = new Tile[25];
-		for (int j = 0; j < 25; j++)
+		tiles[i] = new Tile[mapHeight];
+		for (int j = 0; j < mapHeight; j++)
 		{
 			tiles[i][j] = *new Tile(TileType::Grass, 0);
 		}
@@ -27,6 +29,9 @@ int main()
 	Unit unit1 = *new Unit(1, 1, "Unit_1", "Unit.png");
 	Unit unit2 = *new Unit(1, 2, "Unit_2", "Unit.png");
 
+	Item item3 = *new Item("Backpack", ItemType::Container);
+	unit1.Back(&item3);
+
 	tiles[5][5] = *new Tile(TileType::Mud, 1);
 	tiles[5][6] = *new Tile(TileType::Snow, 3);
 	tiles[5][7] = *new Tile(TileType::Water, 2);
@@ -34,7 +39,7 @@ int main()
 	tiles[1][1].AddUnit(1, 1, unit1);
 	tiles[8][8].AddItem(&item1);
 
-	MapController* mapController = new MapController(25, 25, tiles);
+	MapController* mapController = new MapController(mapWidth, mapHeight, tiles);
 	mapController->AddUnit(&unit2);
 
 	char inputKey = ' ';
@@ -43,9 +48,9 @@ int main()
 	while (inputKey != '0')
 	{
 		system("CLS");
-		for (int y = 0; y < 25; y++)
+		for (int y = 0; y < mapHeight; y++)
 		{
-			for (int x = 0; x < 25; x++)
+			for (int x = 0; x < mapWidth; x++)
 			{
 				if (tiles[x][y].NumberOfItems() == 0 && tiles[x][y].NumberOfUnits() == 0)
 				{

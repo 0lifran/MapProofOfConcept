@@ -151,3 +151,83 @@ void Unit::Move()
 		break;
 	}
 }
+
+Item* Unit::Head()
+{
+	return this->_head;
+}
+
+void Unit::Head(Item* item)
+{
+	this->_head = item;
+}
+
+Item* Unit::LeftHand()
+{
+	return this->_leftHand;
+}
+
+void Unit::LeftHand(Item* item)
+{
+	this->_leftHand = item;
+}
+
+Item* Unit::RightHand()
+{
+	return this->_rightHand;
+}
+
+void  Unit::RightHand(Item* item)
+{
+	this->_rightHand = item;
+}
+
+Item* Unit::Hands()
+{
+	return this->_hands;
+}
+
+void Unit::Hands(Item* item)
+{
+	this->_hands = item;
+}
+
+Item* Unit::Torso()
+{
+	return this->_torso;
+}
+
+void Unit::Torso(Item* item)
+{
+	this->_torso = item;
+}
+
+Item* Unit::Back()
+{
+	return this->_back;
+}
+
+void Unit::Back(Item* item)
+{
+	this->_back;
+}
+
+Item* Unit::Legs()
+{
+	return this->_legs;
+}
+
+void Unit::Legs(Item* item)
+{
+	this->_legs = item;
+}
+
+Item* Unit::Feet()
+{
+	return this->_feet;
+}
+
+void Unit::Feet(Item* item)
+{
+	this->_feet = item;
+}

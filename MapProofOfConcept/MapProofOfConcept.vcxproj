@@ -139,8 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Container.cpp" />
     <ClCompile Include="IdManager.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="ItemType.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapController.cpp" />
@@ -152,9 +154,11 @@
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Container.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="IdManager.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemManager.h" />
     <ClInclude Include="ItemType.h" />
     <ClInclude Include="MapController.h" />
     <ClInclude Include="Printer.h" />

@@ -48,6 +48,12 @@
     <ClCompile Include="Printer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -84,6 +90,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TerminalColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
