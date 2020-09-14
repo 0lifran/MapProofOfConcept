@@ -10,6 +10,20 @@ void ItemManager::Items(Item* items)
 	this->_items = items;
 }
 
+
+Item* ItemManager::GetItemById(int itemId)
+{
+	Item* items = Items();
+	for (int i = 0; i < NumberOfItems(); i++)
+	{
+		if (items[i].Id() == itemId)
+		{
+			return &items[i];
+		}
+	}
+	throw new exception("Item is not in list.");
+}
+
 void ItemManager::AddItem(Item* item)
 {
 	int currentNumberOfItems = IncrementNumberOfItems();

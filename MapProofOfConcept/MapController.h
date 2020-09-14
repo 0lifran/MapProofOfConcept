@@ -2,6 +2,7 @@
 #include "RenderDataArray.h"
 #include "Item.h"
 #include "Unit.h"
+#include "InventoryController.h"
 
 #pragma once
 class MapController
@@ -12,6 +13,10 @@ public:
 	void AddUnit(Unit* unit);
 	void MoveUnit(int id);
 	void RotateUnit(int id, RotationDirection rotationDirection);
+	Unit* GetUnitById(int id);
+	Tile* SpecificTileAt(int x, int y);
+	void InitializeInventory(int unitId);
+	InventoryController* InventoryHandler();
 
 private:
 	 bool _tileDataHasChanged = true;
@@ -26,6 +31,7 @@ private:
 	 Item* _items;
 	 Unit* _units;
 	 int _numberOfUnits = 0;
+	 InventoryController _inventoryHandler;
 
 	RenderDataArray* GetTileRenderData();
 	RenderDataArray* GetItemRenderData();
@@ -47,7 +53,6 @@ private:
 	void MapWidth(int width);
 	int MapHeight();
 	void MapHeight(int height);
-	Tile* SpecificTileAt(int x, int y);
 	void SpecificTileAt(Tile* tile, int x, int y);
 	Tile* Tiles(int x, int y);
 	void AddUnitsOnTilesToRepository();
@@ -80,7 +85,7 @@ private:
 	void PushUnitToMap(int id);
 	int IncrementNumberOfUnits();
 	int DecrementNumberOfUnits();
-	Unit* GetUnitById(int id);
+	
 	bool IsMovementAllowed(Unit* unit);
 	void AddToUnitRepository(Unit unit);
 };

@@ -5,6 +5,7 @@
 
 #include "MapController.h"
 #include "Printer.h"
+#include "InventoryController.h"
 
 using namespace std;
 
@@ -37,7 +38,8 @@ int main()
 	tiles[5][7] = *new Tile(TileType::Water, 2);
 
 	tiles[1][1].AddUnit(1, 1, unit1);
-	tiles[8][8].AddItem(&item1);
+	ItemManager* itemHandler = tiles[8][8].ItemHandler();
+	itemHandler->AddItem(&item1);
 
 	MapController* mapController = new MapController(mapWidth, mapHeight, tiles);
 	mapController->AddUnit(&unit2);
@@ -52,7 +54,8 @@ int main()
 		{
 			for (int x = 0; x < mapWidth; x++)
 			{
-				if (tiles[x][y].NumberOfItems() == 0 && tiles[x][y].NumberOfUnits() == 0)
+				ItemManager* itemHandler = tiles[x][y].ItemHandler();
+				if (itemHandler->NumberOfItems() == 0 && tiles[x][y].NumberOfUnits() == 0)
 				{
 					if (tiles[x][y].Type() == TileType::Grass)
 					{
@@ -105,8 +108,13 @@ int main()
 			mapController->RotateUnit(toggle ? 3 : 4, RotationDirection::Right);
 			break;
 		case 'g':
-
+		{
+			mapController->InitializeInventory(toggle ? 3 : 4);
+			InventoryController inventoryHandler = *mapController->InventoryHandler();
+			inventoryHandler.AttachItemToUnit(1, UnitBodyPart::Back);
+			//inventoryHandler.AttachItemToUnit()
 			break;
+		}
 		case 'x':
 			toggle = !toggle;
 		default:

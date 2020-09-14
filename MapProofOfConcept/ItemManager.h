@@ -8,6 +8,7 @@ public:
 	void AddItem(Item* item);
 	bool TakeOutItem(int id, Item* out);
 	int NumberOfItems();
+	Item* GetItemById(int itemId);
 	
 	
 private:

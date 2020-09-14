@@ -1,16 +1,23 @@
 #include "InventoryController.h"
 #include "Container.h"
 
+InventoryController::InventoryController()
+{
+	InitializeInventory(new Unit(), new Tile());
+}
+
 InventoryController::InventoryController(Unit* unit, Tile* currentTile)
 {
 	this->InitializeInventory(unit, currentTile);
 }
 
 
+
 void InventoryController::InitializeInventory(Unit* unit, Tile* currentTile)
 {
 	CurrentUnit(unit);
-	ItemsOnGround(currentTile->Items());
+	ItemManager* itemHandler = currentTile->ItemHandler();
+	ItemsOnGround(itemHandler->Items());
 }
 
 void InventoryController::CurrentUnit(Unit* unit)
@@ -44,9 +51,17 @@ void InventoryController::CurrentTile(Tile* tile)
 	this->_tile = tile;
 }
 
-bool InventoryController::AttachItemToUnit(Item* item, UnitBodyPart bodyPart)
+bool InventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart)
 {
 	bool result = false;
+	Tile* tile = this->CurrentTile();
+	Item* itemFromGround = new Item();
+	Item* itemFromBack = new Item();
+
+	ItemManager* itemHandler = tile->ItemHandler();
+	Item* item = itemHandler->GetItemById(itemId);
+	itemHandler->TakeOutItem(item->Id(), itemFromGround);
+
 	switch (bodyPart)
 	{
 	case UnitBodyPart::Back:
@@ -63,10 +78,6 @@ bool InventoryController::AttachItemToUnit(Item* item, UnitBodyPart bodyPart)
 			else
 			{
 				// Swap items.
-				Tile* tile = this->CurrentTile();
-				Item* itemFromGround = new Item();
-				Item* itemFromBack = new Item();
-				tile->TakeOutItem(item->Id(), itemFromGround);
 				itemFromBack = this->CurrentUnit()->Back();
 				this->CurrentUnit()->Back(itemFromGround);
 			}

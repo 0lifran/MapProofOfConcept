@@ -5,7 +5,22 @@
 
 MapController::MapController(int width, int height, Tile** tiles)
 {
+	this->_inventoryHandler = *new InventoryController();
 	Tiles(width, height, tiles);
+}
+
+void MapController::InitializeInventory(int unitId)
+{
+	Unit* unit = this->GetUnitById(unitId);
+	int tileX = unit->X();
+	int tileY = unit->Y();
+	Tile* tile = this->SpecificTileAt(tileX, tileY);
+	this->_inventoryHandler = *new InventoryController(unit, tile);
+}
+
+InventoryController* MapController::InventoryHandler()
+{
+	return &this->_inventoryHandler;
 }
 
 // Tile logic.
@@ -52,7 +67,8 @@ void MapController::AddItemsOnTilesToRepository()
 			int numberOfItemsOnTile = curTiles[x][y].NumberOfUnits();
 			if (numberOfItemsOnTile > 0)
 			{
-				Item* itemsOnThisTile = curTiles[x][y].Items();
+				ItemManager* itemHandler = curTiles[x][y].ItemHandler();
+				Item* itemsOnThisTile = itemHandler->Items();
 				for (int i = 0; i < numberOfItemsOnTile; i++)
 				{
 					this->AddItem(&itemsOnThisTile[i]);
@@ -290,11 +306,12 @@ void MapController::RemoveItem(int id)
 	if (x != -1 && y != -1)
 	{
 		Tile** tiles = Tiles();
-		Item* tempI = new Item();;
-		tiles[x, y]->TakeOutItem(id, tempI);
+		Item* tempI = new Item();
+		ItemManager* itemHandler = tiles[x, y]->ItemHandler();
+		itemHandler->TakeOutItem(id, tempI);
 		SetItemDataHasChanged(true);
 		delete tempI;
-	}
+	} 
 	else
 	{
 		throw new exception();
@@ -309,7 +326,8 @@ void MapController::PlaceItemOnTile(int id, int x, int y)
 		{
 			currentItems[i].X(x);
 			currentItems[i].Y(y);
-			this->_tiles[x][y].AddItem(&currentItems[i]);
+			ItemManager* itemHandler = this->_tiles[x][y].ItemHandler();
+			itemHandler->AddItem(&currentItems[i]);
 			SetItemDataHasChanged(true);
 			return;
 		}
@@ -325,7 +343,8 @@ void MapController::PushItemToMap(int id)
 		{
 			int x = currentItems[i].X();
 			int y = currentItems[i].Y();
-			this->_tiles[x][y].AddItem(&currentItems[i]);
+			ItemManager* itemHandler = this->_tiles[x][y].ItemHandler();
+			itemHandler->AddItem(&currentItems[i]);
 			SetItemDataHasChanged(true);
 
 			return;

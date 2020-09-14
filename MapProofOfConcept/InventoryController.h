@@ -6,8 +6,9 @@
 class InventoryController
 {
 public:
+	InventoryController();
 	InventoryController(Unit* unit, Tile* currentTile);
-	bool AttachItemToUnit(Item* Item, UnitBodyPart bodyPart);
+	bool AttachItemToUnit(int itemId, UnitBodyPart bodyPart);
 
 private:
 	void InitializeInventory(Unit* unit, Tile* currentTile);

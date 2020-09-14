@@ -2,6 +2,7 @@
 #include "TileType.h"
 #include "Item.h"
 #include "Unit.h"
+#include "ItemManager.h"
 
 using namespace std;
 
@@ -28,16 +29,8 @@ public:
 	void ImagePath(TileType type);
 
 	// Item data
-	Item* Items();
-	void Items(Item* items);
-	void AddItem(Item* item);
-	bool TakeOutItem(int id, Item* out);
-	int NumberOfItems();
-	void NumberOfItems(int numberOfItems);
-	int IncrementNumberOfItems();
-	int DecrementNumberOfItems();
-	Item* GetItemAtPosition(int positionAt);
-	void RemoveItemAtPosition(int positionAt);
+	ItemManager _itemHandler;
+	ItemManager* ItemHandler();
 
 	// Unit data
 	Unit* Units();
