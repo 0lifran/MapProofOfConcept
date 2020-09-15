@@ -5,7 +5,7 @@
 class Container : public Item
 {
 public:
-	Container(string name, int capacity);
+	Container(string name, int storageSpace, int capacity);
 
 	bool AddItem(Item* item);
 	bool TakeOutItem(int id, Item* out);
@@ -13,8 +13,12 @@ public:
 private:
 	int Capacity();
 	void Capacity(int capacity);
-	bool EnoughSpaceLeft();
+	bool EnoughSpaceLeft(int neededSpace);
+	void CurrentlyOccupiedSpace(int neededSpace);
+	int CurrentlyOccupiedSpace();
+
 	ItemManager ItemHandler;
 	int _capacity;
+	int _currentlyOccupiedSpace;
 };
 

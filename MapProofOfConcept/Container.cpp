@@ -1,6 +1,6 @@
 #include "Container.h"
 
-Container::Container(string name, int capacity) : Item(name, ItemType::Container)
+Container::Container(string name, int storageSpace, int capacity) : Item(name, ItemType::Container, storageSpace)
 {
 	this->ItemHandler = *new ItemManager();
 	this->Capacity(capacity);
@@ -8,11 +8,11 @@ Container::Container(string name, int capacity) : Item(name, ItemType::Container
 
 bool Container::AddItem(Item* item)
 {
-	if (this->EnoughSpaceLeft())
+	if (this->EnoughSpaceLeft(item->StorageSpace()))
 	{
 		this->ItemHandler.AddItem(item);
 	}
-	else 
+	else
 	{
 		return false;
 	}
@@ -23,9 +23,9 @@ bool Container::TakeOutItem(int id, Item* out)
 	return this->ItemHandler.TakeOutItem(id, out);
 }
 
-bool Container::EnoughSpaceLeft()
+bool Container::EnoughSpaceLeft(int neededSpace)
 {
-	return this->ItemHandler.NumberOfItems() < this->Capacity();
+	return this->CurrentlyOccupiedSpace() + neededSpace < this->Capacity();
 }
 
 int Container::Capacity()
@@ -36,4 +36,14 @@ int Container::Capacity()
 void Container::Capacity(int capacity)
 {
 	this->_capacity = capacity;
+}
+
+void Container::CurrentlyOccupiedSpace(int neededSpace)
+{
+	this->_capacity = this->_capacity + neededSpace;
+}
+
+int Container::CurrentlyOccupiedSpace()
+{
+	return this->_currentlyOccupiedSpace;
 }

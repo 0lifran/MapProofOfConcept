@@ -8,6 +8,7 @@ Item* ItemFactory::ProduceItem(ItemPreset preset)
 	case ItemPreset::Backpack:
 	{
 		result = this->ProduceBackpack();
+		break;
 	}
 	default:
 		throw new exception("Unknown item preset.");
@@ -18,7 +19,7 @@ Item* ItemFactory::ProduceItem(ItemPreset preset)
 
 Item* ItemFactory::ProduceBackpack()
 {
-	return new Container("Backpack", 32);
+	return new Container("Backpack", 32, 32);
 }
 
 Container* ItemFactory::ConvertToContainer(Item* input)

@@ -5,8 +5,6 @@
 
 #include "MapController.h"
 #include "Printer.h"
-#include "UnitInventoryController.h"
-#include "Container.h"
 #include "ItemFactory.h"
 
 using namespace std;
@@ -29,8 +27,8 @@ int main()
 		}
 	}
 
-	Item item1 = *new Item("Item_1", ItemType::Common);
-	Item item2 = *new Item("Item_2", ItemType::Common);
+	Item item1 = *new Item("Item_1", ItemType::Common, 1);
+	Item item2 = *new Item("Item_2", ItemType::Common, 1);
 	Unit unit1 = *new Unit(1, 1, "Unit_1", "Unit.png");
 	Unit unit2 = *new Unit(1, 2, "Unit_2", "Unit.png");
 
@@ -98,7 +96,7 @@ int main()
 			cout << endl;
 		}
 
-		cout << "(w) Move (a) Rotate left (d) Rotate right (x) Swap unit selection (g) Take item on top on this tile (0) Exit" << endl << endl;
+		cout << "(w) Move (a) Rotate left (d) Rotate right (x) Swap unit selection (g) Take item on top of this tile (0) Exit" << endl << endl;
 		cout << "Input: ";
 		cin >> inputKey;
 		switch (inputKey)
