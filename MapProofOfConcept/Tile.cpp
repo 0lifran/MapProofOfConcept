@@ -11,6 +11,7 @@ Tile::Tile(TileType type, int height)
 {
 	Type(type);
 	Height(height);
+	this->_itemHandler = *new ItemManager();
 }
 
 Tile::Tile(TileType type)

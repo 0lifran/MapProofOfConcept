@@ -6,6 +6,7 @@
 #include "MapController.h"
 #include "Printer.h"
 #include "InventoryController.h"
+#include "Container.h"
 
 using namespace std;
 
@@ -30,7 +31,7 @@ int main()
 	Unit unit1 = *new Unit(1, 1, "Unit_1", "Unit.png");
 	Unit unit2 = *new Unit(1, 2, "Unit_2", "Unit.png");
 
-	Item item3 = *new Item("Backpack", ItemType::Container);
+	Container item3 = *new Container("Backpack", 32);
 	unit1.Back(&item3);
 
 	tiles[5][5] = *new Tile(TileType::Mud, 1);
@@ -39,6 +40,7 @@ int main()
 
 	tiles[1][1].AddUnit(1, 1, unit1);
 	ItemManager* itemHandler = tiles[8][8].ItemHandler();
+
 	itemHandler->AddItem(&item1);
 
 	MapController* mapController = new MapController(mapWidth, mapHeight, tiles);
@@ -112,7 +114,6 @@ int main()
 			mapController->InitializeInventory(toggle ? 3 : 4);
 			InventoryController inventoryHandler = *mapController->InventoryHandler();
 			inventoryHandler.AttachItemToUnit(1, UnitBodyPart::Back);
-			//inventoryHandler.AttachItemToUnit()
 			break;
 		}
 		case 'x':

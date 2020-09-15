@@ -15,7 +15,7 @@ private:
 	void CurrentUnit(Unit* unit);
 	Unit* CurrentUnit();
 	Item* ItemsOnGround();
-	void ItemsOnGround(Item* items);
+	void ItemsOnGround(Item* items, int numberOfItems);
 	Tile* CurrentTile();
 	void CurrentTile(Tile* tile);
 

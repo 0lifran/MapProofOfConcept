@@ -5,7 +5,7 @@
 class Container : public Item
 {
 public:
-	Container(string name, ItemType type, int capacity);
+	Container(string name, int capacity);
 
 	bool AddItem(Item* item);
 	bool TakeOutItem(int id, Item* out);

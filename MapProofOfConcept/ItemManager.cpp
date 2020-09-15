@@ -40,6 +40,7 @@ void ItemManager::AddItem(Item* item)
 			tempItems[i] = currentItems[i - 1];
 		}
 	}
+	this->Items(tempItems);
 }
 
 bool ItemManager::TakeOutItem(int id, Item* out)
@@ -51,8 +52,7 @@ bool ItemManager::TakeOutItem(int id, Item* out)
 		if (tempItems->Id() == id)
 		{
 			positionAt = i;
-			Item* result = GetItemAtPosition(positionAt);
-			RemoveItemAtPosition(positionAt);
+			Item* result = PullOutItemAt(positionAt);
 			out = result;
 			return true;
 		}
@@ -60,7 +60,7 @@ bool ItemManager::TakeOutItem(int id, Item* out)
 	return false;
 }
 
-Item* ItemManager::GetItemAtPosition(int positionAt)
+Item* ItemManager::PullOutItemAt(int positionAt)
 {
 	Item* result = &this->_items[positionAt];
 	RemoveItemAtPosition(positionAt);
@@ -104,6 +104,13 @@ int ItemManager::IncrementNumberOfItems()
 
 int ItemManager::DecrementNumberOfItems()
 {
-	this->_numberOfItems--;
+	if (_numberOfItems - 1 >= 0)
+	{
+		this->_numberOfItems--;
+	}
+	else 
+	{
+		throw new exception("The number of items must not be less than zero.");
+	}
 	return NumberOfItems();
 }

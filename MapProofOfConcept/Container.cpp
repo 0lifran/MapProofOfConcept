@@ -1,6 +1,6 @@
 #include "Container.h"
 
-Container::Container(string name, ItemType type, int capacity) : Item(name, type)
+Container::Container(string name, int capacity) : Item(name, ItemType::Container)
 {
 	this->ItemHandler = *new ItemManager();
 	this->Capacity(capacity);

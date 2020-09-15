@@ -9,17 +9,17 @@ public:
 	bool TakeOutItem(int id, Item* out);
 	int NumberOfItems();
 	Item* GetItemById(int itemId);
+	void NumberOfItems(int numberOfItems);
 	
 	
 private:
 	int _numberOfItems;
 	Item* _items;
 
-	Item* GetItemAtPosition(int positionAt);
+	Item* PullOutItemAt(int positionAt);
 	void RemoveItemAtPosition(int positionAt);
 	int IncrementNumberOfItems();
 	int DecrementNumberOfItems();
 
-	void NumberOfItems(int numberOfItems);
 };
 

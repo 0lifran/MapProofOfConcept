@@ -10,6 +10,15 @@ Unit::Unit(int x, int y, string name, string imagePath)
 	IdManager idHandler = *new IdManager();
 	this->Id(idHandler.GetNewId());
 	this->DirectionAngle(Direction::South);
+
+	this->Head(new Item());
+	this->Torso(new Item());
+	this->Back(new Item());
+	this->Hands(new Item());
+	this->LeftHand(new Item());
+	this->RightHand(new Item());
+	this->Legs(new Item());
+	this->Feet(new Item());
 }
 
 Unit::Unit()
@@ -20,6 +29,15 @@ Unit::Unit()
 	this->ImagePath("None");
 	this->Id(-1);
 	this->DirectionAngle(Direction::None);
+
+	this->Head(new Item());
+	this->Torso(new Item());
+	this->Back(new Item());
+	this->Hands(new Item());
+	this->LeftHand(new Item());
+	this->RightHand(new Item());
+	this->Legs(new Item());
+	this->Feet(new Item());
 }
 
 int Unit::X()
@@ -209,7 +227,7 @@ Item* Unit::Back()
 
 void Unit::Back(Item* item)
 {
-	this->_back;
+	this->_back = item;
 }
 
 Item* Unit::Legs()

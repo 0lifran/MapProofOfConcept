@@ -1,5 +1,6 @@
 #include "InventoryController.h"
 #include "Container.h"
+#include <iostream>
 
 InventoryController::InventoryController()
 {
@@ -16,8 +17,9 @@ InventoryController::InventoryController(Unit* unit, Tile* currentTile)
 void InventoryController::InitializeInventory(Unit* unit, Tile* currentTile)
 {
 	CurrentUnit(unit);
+	CurrentTile(currentTile);
 	ItemManager* itemHandler = currentTile->ItemHandler();
-	ItemsOnGround(itemHandler->Items());
+	ItemsOnGround(itemHandler->Items(), itemHandler->NumberOfItems());
 }
 
 void InventoryController::CurrentUnit(Unit* unit)
@@ -35,10 +37,11 @@ Item* InventoryController::ItemsOnGround()
 	return this->_itemsOnGround.Items();
 }
 
-void InventoryController::ItemsOnGround(Item* items)
+void InventoryController::ItemsOnGround(Item* items, int numberOfItems)
 {
 	this->_itemsOnGround = *new ItemManager();
 	this->_itemsOnGround.Items(items);
+	this->_itemsOnGround.NumberOfItems(numberOfItems);
 }
 
 Tile* InventoryController::CurrentTile()
@@ -55,12 +58,12 @@ bool InventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart)
 {
 	bool result = false;
 	Tile* tile = this->CurrentTile();
-	Item* itemFromGround = new Item();
+	Item itemFromGround = *new Item();
 	Item* itemFromBack = new Item();
 
 	ItemManager* itemHandler = tile->ItemHandler();
 	Item* item = itemHandler->GetItemById(itemId);
-	itemHandler->TakeOutItem(item->Id(), itemFromGround);
+	itemHandler->TakeOutItem(item->Id(), &itemFromGround);
 
 	switch (bodyPart)
 	{
@@ -73,19 +76,20 @@ bool InventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart)
 			{
 				// If the item is a container item, add the item to the container.
 				Container* containerItem = static_cast<Container*>(backItem);
-				containerItem->AddItem(item);
+				return containerItem->AddItem(item);
 			}
 			else
 			{
 				// Swap items.
 				itemFromBack = this->CurrentUnit()->Back();
-				this->CurrentUnit()->Back(itemFromGround);
+				this->CurrentUnit()->Back(&itemFromGround);
 			}
 		}
 		else
 		{
 			this->CurrentUnit()->Back(item);
 		}
+		cout << CurrentUnit()->Back()->Name();
 		break;
 	}
 	case UnitBodyPart::Head:
