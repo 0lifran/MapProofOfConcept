@@ -2,7 +2,7 @@
 #include "RenderDataArray.h"
 #include "Item.h"
 #include "Unit.h"
-#include "InventoryController.h"
+#include "UnitInventoryController.h"
 
 #pragma once
 class MapController
@@ -16,7 +16,7 @@ public:
 	Unit* GetUnitById(int id);
 	Tile* SpecificTileAt(int x, int y);
 	void InitializeInventory(int unitId);
-	InventoryController* InventoryHandler();
+	UnitInventoryController* InventoryHandler();
 
 private:
 	 bool _tileDataHasChanged = true;
@@ -31,7 +31,7 @@ private:
 	 Item* _items;
 	 Unit* _units;
 	 int _numberOfUnits = 0;
-	 InventoryController _inventoryHandler;
+	 UnitInventoryController _inventoryHandler;
 
 	RenderDataArray* GetTileRenderData();
 	RenderDataArray* GetItemRenderData();

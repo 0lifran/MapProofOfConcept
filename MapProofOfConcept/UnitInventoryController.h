@@ -3,11 +3,11 @@
 #include "ItemManager.h"
 #include "UnitBodyPart.h"
 
-class InventoryController
+class UnitInventoryController
 {
 public:
-	InventoryController();
-	InventoryController(Unit* unit, Tile* currentTile);
+	UnitInventoryController();
+	UnitInventoryController(Unit* unit, Tile* currentTile);
 	bool AttachItemToUnit(int itemId, UnitBodyPart bodyPart);
 
 private:

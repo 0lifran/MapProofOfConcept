@@ -141,7 +141,8 @@
   <ItemGroup>
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="IdManager.cpp" />
-    <ClCompile Include="InventoryController.cpp" />
+    <ClCompile Include="ItemFactory.cpp" />
+    <ClCompile Include="UnitInventoryController.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="ItemType.cpp" />
@@ -158,7 +159,9 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="IdManager.h" />
-    <ClInclude Include="InventoryController.h" />
+    <ClInclude Include="ItemFactory.h" />
+    <ClInclude Include="ItemPreset.h" />
+    <ClInclude Include="UnitInventoryController.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="ItemType.h" />

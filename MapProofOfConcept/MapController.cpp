@@ -5,7 +5,7 @@
 
 MapController::MapController(int width, int height, Tile** tiles)
 {
-	this->_inventoryHandler = *new InventoryController();
+	this->_inventoryHandler = *new UnitInventoryController();
 	Tiles(width, height, tiles);
 }
 
@@ -15,10 +15,10 @@ void MapController::InitializeInventory(int unitId)
 	int tileX = unit->X();
 	int tileY = unit->Y();
 	Tile* tile = this->SpecificTileAt(tileX, tileY);
-	this->_inventoryHandler = *new InventoryController(unit, tile);
+	this->_inventoryHandler = *new UnitInventoryController(unit, tile);
 }
 
-InventoryController* MapController::InventoryHandler()
+UnitInventoryController* MapController::InventoryHandler()
 {
 	return &this->_inventoryHandler;
 }

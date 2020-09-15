@@ -5,8 +5,9 @@
 
 #include "MapController.h"
 #include "Printer.h"
-#include "InventoryController.h"
+#include "UnitInventoryController.h"
 #include "Container.h"
+#include "ItemFactory.h"
 
 using namespace std;
 
@@ -17,6 +18,8 @@ int main()
 	// test code.
 	Printer _printer = *new Printer();
 	Tile** tiles = new Tile * [mapWidth];
+	ItemFactory itemProducer = *new ItemFactory();
+
 	for (int i = 0; i < mapWidth; i++)
 	{
 		tiles[i] = new Tile[mapHeight];
@@ -31,7 +34,7 @@ int main()
 	Unit unit1 = *new Unit(1, 1, "Unit_1", "Unit.png");
 	Unit unit2 = *new Unit(1, 2, "Unit_2", "Unit.png");
 
-	Container item3 = *new Container("Backpack", 32);
+	Container item3 = *itemProducer.ConvertToContainer((itemProducer.ProduceItem(ItemPreset::Backpack)));
 	unit1.Back(&item3);
 
 	tiles[5][5] = *new Tile(TileType::Mud, 1);
@@ -112,7 +115,7 @@ int main()
 		case 'g':
 		{
 			mapController->InitializeInventory(toggle ? 3 : 4);
-			InventoryController inventoryHandler = *mapController->InventoryHandler();
+			UnitInventoryController inventoryHandler = *mapController->InventoryHandler();
 			inventoryHandler.AttachItemToUnit(1, UnitBodyPart::Back);
 			break;
 		}

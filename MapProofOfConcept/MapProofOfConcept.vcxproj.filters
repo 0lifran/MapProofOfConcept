@@ -13,99 +13,144 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Module">
+      <UniqueIdentifier>{d3a88616-8ae6-48fa-827e-b0a747dc0055}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Module\Item">
+      <UniqueIdentifier>{c54ab310-cf2c-4831-83c6-91d506cf8343}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Module\Unit">
+      <UniqueIdentifier>{b8921f32-aa33-4ab3-a705-2ff9af12b379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Module\Map">
+      <UniqueIdentifier>{b91fe824-7f6a-4a5d-a978-e9ee8953e8cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Module\Shared">
+      <UniqueIdentifier>{9966ef16-7ad1-4289-9fd4-22e1beb5494d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Module\Utils">
+      <UniqueIdentifier>{3d116848-a716-4344-854e-40c4ac261a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Module">
+      <UniqueIdentifier>{ff1364c5-9680-48d9-8b09-93761c2e4330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Module\Item">
+      <UniqueIdentifier>{61959c1b-0d85-4e48-b21b-d7caf635b40a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Module\Unit">
+      <UniqueIdentifier>{b0f37075-6608-4bfc-9865-dd4233aced81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Module\Map">
+      <UniqueIdentifier>{8dc28065-57a8-404f-858c-617c431d5df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Module\Shared">
+      <UniqueIdentifier>{e959135b-c058-481b-b573-1b5b3a22796d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Module\Utils">
+      <UniqueIdentifier>{3584cecf-fd77-4245-bc42-42a053e11595}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MapController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderDataArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemType.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="RotationDirection.h">
+      <Filter>Header Files\Module\Unit</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Module\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="RotationDirection.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IdManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Printer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="UnitInventoryController.cpp">
+      <Filter>Source Files\Module\Unit</Filter>
     </ClCompile>
     <ClCompile Include="Container.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Module\Item</Filter>
     </ClCompile>
     <ClCompile Include="ItemManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Module\Item</Filter>
     </ClCompile>
-    <ClCompile Include="InventoryController.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ItemType.cpp">
+      <Filter>Source Files\Module\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Module\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="IdManager.cpp">
+      <Filter>Source Files\Module\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files\Module\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapController.cpp">
+      <Filter>Source Files\Module\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Printer.cpp">
+      <Filter>Source Files\Module\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderDataArray.cpp">
+      <Filter>Source Files\Module\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderData.cpp">
+      <Filter>Source Files\Module\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Source Files\Module\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Tile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TileType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MapController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderDataArray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Direction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IdManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Printer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TerminalColor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Container.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Module\Item</Filter>
     </ClInclude>
     <ClInclude Include="ItemManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Module\Item</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryController.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Module\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemType.h">
+      <Filter>Header Files\Module\Item</Filter>
     </ClInclude>
     <ClInclude Include="UnitBodyPart.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Module\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Header Files\Module\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitInventoryController.h">
+      <Filter>Header Files\Module\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="MapController.h">
+      <Filter>Header Files\Module\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files\Module\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TileType.h">
+      <Filter>Header Files\Module\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>Header Files\Module\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="IdManager.h">
+      <Filter>Header Files\Module\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderDataArray.h">
+      <Filter>Header Files\Module\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderData.h">
+      <Filter>Header Files\Module\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="TerminalColor.h">
+      <Filter>Header Files\Module\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Printer.h">
+      <Filter>Header Files\Module\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemPreset.h">
+      <Filter>Header Files\Module\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemFactory.h">
+      <Filter>Header Files\Module\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
