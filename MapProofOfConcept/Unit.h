@@ -3,6 +3,7 @@
 #include "RotationDirection.h"
 #include "Direction.h"
 #include "Item.h"
+#include "UnitBodyPart.h"
 
 using namespace std;
 
@@ -29,22 +30,10 @@ public:
 	string ImagePath();
 	void ImagePath(string path);
 
-	Item* Head();
-	void Head(Item* item);
-	Item* LeftHand();
-	void LeftHand(Item* item);
-	Item* RightHand();
-	void  RightHand(Item* item);
-	Item* Hands();
-	void Hands(Item* item);
-	Item* Torso();
-	void Torso(Item* item);
-	Item* Back();
-	void Back(Item* item);
-	Item* Legs();
-	void Legs(Item* item);
-	Item* Feet();
-	void Feet(Item* item);
+	Item* UnitItem(UnitBodyPart bodyPart);
+	void UnitItem(Item* item, UnitBodyPart bodyPart);
+
+	
 
 private:
 	void Id(int id);
@@ -65,6 +54,23 @@ private:
 	Item* _back;
 	Item* _legs;
 	Item* _feet;
+
+	Item* Head();
+	void Head(Item* item);
+	Item* LeftHand();
+	void LeftHand(Item* item);
+	Item* RightHand();
+	void  RightHand(Item* item);
+	Item* Hands();
+	void Hands(Item* item);
+	Item* Torso();
+	void Torso(Item* item);
+	Item* Back();
+	void Back(Item* item);
+	Item* Legs();
+	void Legs(Item* item);
+	Item* Feet();
+	void Feet(Item* item);
 
 };
 

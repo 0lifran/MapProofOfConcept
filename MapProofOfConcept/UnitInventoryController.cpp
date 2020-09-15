@@ -67,7 +67,7 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 	{
 	case UnitBodyPart::Back:
 	{
-		Item* backItem = this->CurrentUnit()->Back();
+		Item* backItem = this->CurrentUnit()->UnitItem(UnitBodyPart::Back);
 		if (backItem->Type() != ItemType::None)
 		{
 			if (backItem->Type() == ItemType::Container)
@@ -83,141 +83,141 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 			else
 			{
 				// Swap items.
-				itemFromInventory = this->CurrentUnit()->Back();
-				this->CurrentUnit()->Back(&itemFromGround);
+				itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Back);
+				this->CurrentUnit()->UnitItem(&itemFromGround,UnitBodyPart::Back);
 				this->_itemsOnGround.AddItem(itemFromInventory);
 				return true;
 			}
 		}
 		else
 		{
-			this->CurrentUnit()->Back(item);
+			this->CurrentUnit()->UnitItem(item, UnitBodyPart::Back);
 			return true;
 		}
 		break;
 	}
 	case UnitBodyPart::Head:
 	{
-		Item* headItem = this->CurrentUnit()->Head();
+		Item* headItem = this->CurrentUnit()->UnitItem(UnitBodyPart::Head);
 		if (headItem->Type() != ItemType::None)
 		{
 			// Swap items.
-			itemFromInventory = this->CurrentUnit()->Head();
-			this->CurrentUnit()->Head(&itemFromGround);
+			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Head);
+			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::Head);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
 		else
 		{
-			this->CurrentUnit()->Head(item);
+			this->CurrentUnit()->UnitItem(item, UnitBodyPart::Head);
 			return true;
 		}
 		break;
 	}
 	case UnitBodyPart::Feet:
 	{
-		Item* headItem = this->CurrentUnit()->Feet();
+		Item* headItem = this->CurrentUnit()->UnitItem(UnitBodyPart::Feet);
 		if (headItem->Type() != ItemType::None)
 		{
 			// Swap items.
-			itemFromInventory = this->CurrentUnit()->Feet();
-			this->CurrentUnit()->Feet(&itemFromGround);
+			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Feet);
+			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::Feet);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
 		else
 		{
-			this->CurrentUnit()->Feet(item);
+			this->CurrentUnit()->UnitItem(item, UnitBodyPart::Feet);
 			return true;
 		}
 		break;
 	}
 	case UnitBodyPart::Hands:
 	{
-		Item* headItem = this->CurrentUnit()->Hands();
+		Item* headItem = this->CurrentUnit()->UnitItem(UnitBodyPart::Hands);
 		if (headItem->Type() != ItemType::None)
 		{
 			// Swap items.
-			itemFromInventory = this->CurrentUnit()->Hands();
-			this->CurrentUnit()->Hands(&itemFromGround);
+			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Hands);
+			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::Hands);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
 		else
 		{
-			this->CurrentUnit()->Hands(item);
+			this->CurrentUnit()->UnitItem(item, UnitBodyPart::Hands);
 			return true;
 		}
 		break;
 	}
 	case UnitBodyPart::LeftHand:
 	{
-		Item* headItem = this->CurrentUnit()->LeftHand();
+		Item* headItem = this->CurrentUnit()->UnitItem(UnitBodyPart::LeftHand);
 		if (headItem->Type() != ItemType::None)
 		{
 			// Swap items.
-			itemFromInventory = this->CurrentUnit()->LeftHand();
-			this->CurrentUnit()->LeftHand(&itemFromGround);
+			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::LeftHand);
+			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::LeftHand);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
 		else
 		{
-			this->CurrentUnit()->LeftHand(item);
+			this->CurrentUnit()->UnitItem(item, UnitBodyPart::LeftHand);
 			return true;
 		}
 		break;
 	}
 	case UnitBodyPart::RightHand:
 	{
-		Item* headItem = this->CurrentUnit()->RightHand();
+		Item* headItem = this->CurrentUnit()->UnitItem(UnitBodyPart::RightHand);
 		if (headItem->Type() != ItemType::None)
 		{
 			// Swap items.
-			itemFromInventory = this->CurrentUnit()->RightHand();
-			this->CurrentUnit()->RightHand(&itemFromGround);
+			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::RightHand);
+			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::RightHand);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
 		else
 		{
-			this->CurrentUnit()->RightHand(item);
+			this->CurrentUnit()->UnitItem(item, UnitBodyPart::RightHand);
 			return true;
 		}
 		break;
 	}
 	case UnitBodyPart::Legs:
 	{
-		Item* headItem = this->CurrentUnit()->Legs();
+		Item* headItem = this->CurrentUnit()->UnitItem(UnitBodyPart::Legs);
 		if (headItem->Type() != ItemType::None)
 		{
 			// Swap items.
-			itemFromInventory = this->CurrentUnit()->Legs();
-			this->CurrentUnit()->Legs(&itemFromGround);
+			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Legs);
+			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::Legs);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
 		else
 		{
-			this->CurrentUnit()->Legs(item);
+			this->CurrentUnit()->UnitItem(item, UnitBodyPart::Legs);
 			return true;
 		}
 		break;
 	}
 	case UnitBodyPart::Torso:
 	{
-		Item* headItem = this->CurrentUnit()->Torso();
+		Item* headItem = this->CurrentUnit()->UnitItem(UnitBodyPart::Torso);
 		if (headItem->Type() != ItemType::None)
 		{
 			// Swap items.
-			itemFromInventory = this->CurrentUnit()->Torso();
-			this->CurrentUnit()->Torso(&itemFromGround);
+			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Torso);
+			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::Torso);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
 		else
 		{
-			this->CurrentUnit()->Torso(item);
+			this->CurrentUnit()->UnitItem(item, UnitBodyPart::Torso);
 			return true;
 		}
 		break;

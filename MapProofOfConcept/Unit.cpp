@@ -249,3 +249,105 @@ void Unit::Feet(Item* item)
 {
 	this->_feet = item;
 }
+
+Item* Unit::UnitItem(UnitBodyPart bodyPart)
+{
+	switch (bodyPart)
+	{
+	case UnitBodyPart::Back:
+	{
+		return this->Back();
+		break;
+	}
+	case UnitBodyPart::Feet:
+	{
+		return this->Feet();
+		break;
+	}
+	case UnitBodyPart::Hands:
+	{
+		return this->Hands();
+		break;
+	}
+	case UnitBodyPart::Head:
+	{
+		return this->Head();
+		break;
+	}
+	case UnitBodyPart::LeftHand:
+	{
+		return this->LeftHand();
+		break;
+	}
+	case UnitBodyPart::Legs:
+	{
+		return this->Legs();
+		break;
+	}
+	case UnitBodyPart::RightHand:
+	{
+		return this->RightHand();
+		break;
+	}
+	case UnitBodyPart::Torso:
+	{
+		return this->Torso();
+		break;
+	}
+	default:
+	{
+		throw new exception("Unknown unit body part.");
+	}
+	}
+}
+
+void Unit::UnitItem(Item* item, UnitBodyPart bodyPart)
+{
+	switch (bodyPart)
+	{
+	case UnitBodyPart::Back:
+	{
+		this->Back(item);
+		break;
+	}
+	case UnitBodyPart::Feet:
+	{
+		this->Feet(item);
+		break;
+	}
+	case UnitBodyPart::Hands:
+	{
+		this->Hands(item);
+		break;
+	}
+	case UnitBodyPart::Head:
+	{
+		this->Head(item);
+		break;
+	}
+	case UnitBodyPart::LeftHand:
+	{
+		this->LeftHand(item);
+		break;
+	}
+	case UnitBodyPart::Legs:
+	{
+		this->Legs(item);
+		break;
+	}
+	case UnitBodyPart::RightHand:
+	{
+		this->RightHand(item);
+		break;
+	}
+	case UnitBodyPart::Torso:
+	{
+		this->Torso(item);
+		break;
+	}
+	default:
+	{
+		throw new exception("Unknown unit body part.");
+	}
+	}
+}

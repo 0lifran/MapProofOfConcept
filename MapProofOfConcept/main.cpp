@@ -33,7 +33,7 @@ int main()
 	Unit unit2 = *new Unit(1, 2, "Unit_2", "Unit.png");
 
 	Container item3 = *itemProducer.ConvertToContainer((itemProducer.ProduceItem(ItemPreset::Backpack)));
-	unit1.Back(&item3);
+	unit1.UnitItem(&item3, UnitBodyPart::Back);
 
 	tiles[5][5] = *new Tile(TileType::Mud, 1);
 	tiles[5][6] = *new Tile(TileType::Snow, 3);

@@ -1,7 +1,6 @@
 #pragma once
 #include "Tile.h"
 #include "ItemManager.h"
-#include "UnitBodyPart.h"
 
 class UnitInventoryController
 {
