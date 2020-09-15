@@ -139,9 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BallisticMagazine.cpp" />
+    <ClCompile Include="BallisticWeapon.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="IdManager.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
+    <ClCompile Include="RangedWeapon.cpp" />
     <ClCompile Include="UnitInventoryController.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemManager.cpp" />
@@ -154,13 +157,18 @@
     <ClCompile Include="RotationDirection.h" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BallisticMagazine.h" />
+    <ClInclude Include="BallisticMagazineType.h" />
+    <ClInclude Include="BallisticWeapon.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="IdManager.h" />
     <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="ItemPreset.h" />
+    <ClInclude Include="RangedWeapon.h" />
     <ClInclude Include="UnitInventoryController.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemManager.h" />
@@ -174,6 +182,8 @@
     <ClInclude Include="TileType.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitBodyPart.h" />
+    <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

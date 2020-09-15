@@ -55,6 +55,18 @@
     <Filter Include="Source Files\Component\Unit">
       <UniqueIdentifier>{b0f37075-6608-4bfc-9865-dd4233aced81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Component\Item\Container">
+      <UniqueIdentifier>{52933a3a-b8f8-4b9e-bca6-2899b78a662b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Item\Weapon">
+      <UniqueIdentifier>{a83d41bc-6532-4ec7-923e-2c7c48fd29e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component\Item\Weapon">
+      <UniqueIdentifier>{72e5fbd4-d545-4c17-b120-9a68466de958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component\Item\Container">
+      <UniqueIdentifier>{201898bc-5318-4936-b64c-c0159f85075a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="UnitInventoryController.cpp">
       <Filter>Source Files\Component\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="Container.cpp">
-      <Filter>Source Files\Component\Item</Filter>
     </ClCompile>
     <ClCompile Include="ItemManager.cpp">
       <Filter>Source Files\Component\Item</Filter>
@@ -102,11 +111,23 @@
     <ClCompile Include="ItemFactory.cpp">
       <Filter>Source Files\Component\Item</Filter>
     </ClCompile>
+    <ClCompile Include="BallisticMagazine.cpp">
+      <Filter>Source Files\Component\Item\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="BallisticWeapon.cpp">
+      <Filter>Source Files\Component\Item\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="RangedWeapon.cpp">
+      <Filter>Source Files\Component\Item\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Component\Item\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>Source Files\Component\Item\Container</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Container.h">
-      <Filter>Header Files\Component\Item</Filter>
-    </ClInclude>
     <ClInclude Include="ItemManager.h">
       <Filter>Header Files\Component\Item</Filter>
     </ClInclude>
@@ -157,6 +178,27 @@
     </ClInclude>
     <ClInclude Include="ItemFactory.h">
       <Filter>Header Files\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BallisticMagazine.h">
+      <Filter>Header Files\Component\Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="BallisticMagazineType.h">
+      <Filter>Header Files\Component\Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="BallisticWeapon.h">
+      <Filter>Header Files\Component\Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files\Component\Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponType.h">
+      <Filter>Header Files\Component\Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Header Files\Component\Item\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="RangedWeapon.h">
+      <Filter>Header Files\Component\Item\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
