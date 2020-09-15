@@ -6,11 +6,11 @@ class Weapon : Item
 {
 public:
 	Weapon();
-	Weapon(int damage, WeaponType type);
+	Weapon(string name, ItemType type, int storageSpace, int damage, WeaponType weaponType);
 	int Damage();
 	void Damage(int damage);
-	WeaponType Type();
-	void Type(WeaponType type);
+	WeaponType SubType();
+	void SubType(WeaponType type);
 private:
 	int _damage;
 	WeaponType _type;

@@ -4,6 +4,7 @@
 class RangedWeapon : Weapon
 {
 public:
+	RangedWeapon(string name, ItemType type, int storageSpace, int damage, WeaponType weaponType, int closeRangeMin, int closeRangeMax, int mediumRangeMin, int mediumRangeMax, int highRangeMin, int highRangeMax, int extendedRangeMin, int extendedRangeMax);
 	RangedWeapon();
 
 	int CloseRangeMin();

@@ -303,6 +303,9 @@ Item* Unit::UnitItem(UnitBodyPart bodyPart)
 
 void Unit::UnitItem(Item* item, UnitBodyPart bodyPart)
 {
+	item->X(-1);
+	item->Y(-1);
+
 	switch (bodyPart)
 	{
 	case UnitBodyPart::Back:

@@ -2,6 +2,7 @@
 #include "Item.h"
 #include "ItemPreset.h"
 #include "Container.h"
+#include "BallisticWeapon.h"
 
 class ItemFactory
 {
@@ -10,6 +11,6 @@ public:
 	Item* ProduceItem(ItemPreset preset);
 private:
 	Item* ProduceBackpack();
-	Item* ProduceWoolHat();
+	Item* ProduceSemiAutomaticPistol();
 };
 
