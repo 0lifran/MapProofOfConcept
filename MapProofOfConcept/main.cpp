@@ -29,11 +29,14 @@ int main()
 
 	Item item1 = *new Item("Item_1", ItemType::Common, 1);
 	Item item2 = *new Item("Item_2", ItemType::Common, 1);
+	BallisticWeapon item4 = *itemProducer.ConvertToBallisticWeapon(itemProducer.ProduceItem(ItemPreset::SemiAutomaticPistol));
+
 	Unit unit1 = *new Unit(1, 1, "Unit_1", "Unit.png");
 	Unit unit2 = *new Unit(1, 2, "Unit_2", "Unit.png");
 
 	Container item3 = *itemProducer.ConvertToContainer((itemProducer.ProduceItem(ItemPreset::Backpack)));
 	unit1.UnitItem(&item3, UnitBodyPart::Back);
+	unit1.UnitItem(&item4, UnitBodyPart::RightHand);
 
 	tiles[5][5] = *new Tile(TileType::Mud, 1);
 	tiles[5][6] = *new Tile(TileType::Snow, 3);

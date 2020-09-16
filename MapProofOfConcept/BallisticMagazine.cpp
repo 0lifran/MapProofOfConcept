@@ -60,7 +60,7 @@ void BallisticMagazine::BulletsLeft(int bulletsLeft)
 
 bool BallisticMagazine::DecrementBulletsLeft()
 {
-	if (this->BulletsLeft() == 0)
+	if (this->BulletsLeft() > 0)
 	{
 		this->_bulletsLeft--;
 		return true;

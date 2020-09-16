@@ -8,6 +8,8 @@ class ItemFactory
 {
 public:
 	Container* ConvertToContainer(Item* item);
+	BallisticWeapon* ConvertToBallisticWeapon(Item* item);
+
 	Item* ProduceItem(ItemPreset preset);
 private:
 	Item* ProduceBackpack();

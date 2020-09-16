@@ -1,6 +1,6 @@
 #include "Weapon.h"
 
-Weapon::Weapon(string name, ItemType type, int storageSpace, int damage, WeaponType weaponType) : Item(name, type, storageSpace)
+Weapon::Weapon(string name, ItemType type, int storageSpace, int damage, WeaponType weaponType, int closeRangeMin, int closeRangeMax, int mediumRangeMin, int mediumRangeMax, int highRangeMin, int highRangeMax, int extendedRangeMin, int extendedRangeMax) : Item(name, type, storageSpace)
 {
 	this->Damage(damage);
 	this->SubType(weaponType);

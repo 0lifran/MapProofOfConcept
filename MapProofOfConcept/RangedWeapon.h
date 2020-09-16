@@ -1,7 +1,7 @@
 #include "Weapon.h"
 
 #pragma once
-class RangedWeapon : Weapon
+class RangedWeapon : public Weapon
 {
 public:
 	RangedWeapon(string name, ItemType type, int storageSpace, int damage, WeaponType weaponType, int closeRangeMin, int closeRangeMax, int mediumRangeMin, int mediumRangeMax, int highRangeMin, int highRangeMax, int extendedRangeMin, int extendedRangeMax);

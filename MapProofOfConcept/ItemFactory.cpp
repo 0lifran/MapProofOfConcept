@@ -29,10 +29,33 @@ Item* ItemFactory::ProduceBackpack()
 
 Item* ItemFactory::ProduceSemiAutomaticPistol()
 {
-	return new BallisticWeapon("Semi Automatic Pistol")
+	return new BallisticWeapon(
+		"Semi Automatic Pistol", 
+		ItemType::Weapon, 
+		3, 
+		2, 
+		WeaponType::Ballistic, 
+		1,
+		5,
+		6,
+		10,
+		11,
+		15,
+		16,
+		20, 
+		*new BallisticMagazine(
+			10,
+			10,
+			BallisticMagazineType::NineMm), 
+		BallisticMagazineType::NineMm);
 }
 
 Container* ItemFactory::ConvertToContainer(Item* input)
 {
 	return static_cast<Container*>(input);
+}
+
+BallisticWeapon* ItemFactory::ConvertToBallisticWeapon(Item* input)
+{
+	return static_cast<BallisticWeapon*>(input);
 }

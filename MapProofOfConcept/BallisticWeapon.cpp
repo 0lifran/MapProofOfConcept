@@ -1,8 +1,37 @@
 #include "BallisticWeapon.h"
 
-BallisticWeapon::BallisticWeapon(BallisticMagazineType magazineType) : RangedWeapon()
+BallisticWeapon::BallisticWeapon(
+	string name, 
+	ItemType type, 
+	int storageSpace, 
+	int damage, 
+	WeaponType weaponType, 
+	int closeRangeMin, 
+	int closeRangeMax, 
+	int mediumRangeMin, 
+	int mediumRangeMax, 
+	int highRangeMin, 
+	int highRangeMax, 
+	int extendedRangeMin, 
+	int extendedRangeMax, 
+	BallisticMagazine magazine, 
+	BallisticMagazineType ammoType) 
+	: RangedWeapon(
+		name, 
+		type, 
+		storageSpace, 
+		damage, 
+		weaponType, 
+		closeRangeMin, 
+		closeRangeMax, 
+		mediumRangeMin, 
+		mediumRangeMax, 
+		highRangeMin, 
+		highRangeMax, 
+		extendedRangeMin, 
+		extendedRangeMax)
 {
-	this->MagazineType(magazineType);
+	this->MagazineType(ammoType);
 }
 
 BallisticWeapon::BallisticWeapon() : RangedWeapon()
@@ -18,18 +47,22 @@ bool BallisticWeapon::TakeOutMagazine(BallisticMagazine* out)
 		Magazine(new BallisticMagazine());
 		return true;
 	}
-	else 
+	else
 	{
 		return false;
 	}
 }
 
-bool BallisticWeapon::Reload(BallisticMagazine* magazine)
+bool BallisticWeapon::Reload(BallisticMagazine* magazine, BallisticMagazine* out)
 {
 	if (this->Magazine()->Type() == BallisticMagazineType::None)
 	{
 		if (magazine->Type() == this->MagazineType())
 		{
+			if (this->Magazine()->Type() != BallisticMagazineType::None)
+			{
+				this->TakeOutMagazine(out);
+			}
 			this->Magazine(magazine);
 			return true;
 		}
@@ -46,15 +79,7 @@ bool BallisticWeapon::Reload(BallisticMagazine* magazine)
 
 bool BallisticWeapon::Fire()
 {
-	if (this->Magazine()->BulletsLeft() > 0)
-	{
-		this->Magazine()->GetBullet();
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return this->Magazine()->GetBullet();
 }
 
 BallisticMagazine* BallisticWeapon::Magazine()

@@ -1,5 +1,6 @@
 enum class ItemPreset
 {
 	None,
-	Backpack
+	Backpack,
+	SemiAutomaticPistol
 };

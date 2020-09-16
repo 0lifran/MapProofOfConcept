@@ -1,6 +1,6 @@
 #include "RangedWeapon.h"
 
-RangedWeapon::RangedWeapon(string name, ItemType type, int storageSpace, int damage, WeaponType weaponType, int closeRangeMin, int closeRangeMax, int mediumRangeMin, int mediumRangeMax, int highRangeMin, int highRangeMax, int extendedRangeMin, int extendedRangeMax) : Weapon(name, type, storageSpace, damage, weaponType)
+RangedWeapon::RangedWeapon(string name, ItemType type, int storageSpace, int damage, WeaponType weaponType, int closeRangeMin, int closeRangeMax, int mediumRangeMin, int mediumRangeMax, int highRangeMin, int highRangeMax, int extendedRangeMin, int extendedRangeMax) : Weapon(name, type, storageSpace, damage, weaponType, closeRangeMin, closeRangeMax, mediumRangeMin, mediumRangeMax, highRangeMin, highRangeMax, extendedRangeMin, extendedRangeMax)
 {
 	CloseRangeMin(closeRangeMin);
 	CloseRangeMax(closeRangeMax);
