@@ -8,8 +8,10 @@ using namespace std;
 class Item
 {
 public:
+	Item(int id, string name, ItemType type, int storageSpace);
 	Item(string name, ItemType type, int storageSpace);
 	Item();
+	void Id(int id);
 	int Id();
 	int X();
 	int Y();
@@ -27,7 +29,7 @@ public:
 	void ImagePath(string path);
 
 private:
-	void Id(int id);
+	
 
 	int _id;
 	int _x;

@@ -126,6 +126,9 @@
     <ClCompile Include="Container.cpp">
       <Filter>Source Files\Component\Item\Container</Filter>
     </ClCompile>
+    <ClCompile Include="ItemClassConverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ItemManager.h">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="RangedWeapon.h">
       <Filter>Header Files\Component\Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemClassConverter.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

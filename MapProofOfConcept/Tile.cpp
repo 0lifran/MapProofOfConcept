@@ -107,7 +107,7 @@ void Tile::Units(Unit* units)
 {
 	this->_units = units;
 }
-void Tile::AddUnit(int x, int y, Unit unit)
+void Tile::AddUnit(int x, int y, Unit* unit)
 {
 	int currentNumberOfUnits = IncrementNumberOfUnits();
 	SetOccupied(true);
@@ -119,7 +119,7 @@ void Tile::AddUnit(int x, int y, Unit unit)
 		{
 			if (i == 0)
 			{
-				tempUnits[i] = unit;
+				tempUnits[i] = *unit;
 			}
 			else
 			{
@@ -130,7 +130,7 @@ void Tile::AddUnit(int x, int y, Unit unit)
 	}
 	else 
 	{
-		tempUnits[0] = unit;
+		tempUnits[0] = *unit;
 		this->Units(tempUnits);
 	}
 }

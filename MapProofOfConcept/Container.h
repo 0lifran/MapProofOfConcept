@@ -8,10 +8,10 @@ public:
 	Container(string name, int storageSpace, int capacity);
 
 	bool AddItem(Item* item);
-	bool TakeOutItem(int id, Item* out);
+	Item* TakeOutItem(int id);
+	int Capacity();
 
 private:
-	int Capacity();
 	void Capacity(int capacity);
 	bool EnoughSpaceLeft(int neededSpace);
 	void CurrentlyOccupiedSpace(int neededSpace);

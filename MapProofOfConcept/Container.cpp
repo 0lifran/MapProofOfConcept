@@ -18,9 +18,9 @@ bool Container::AddItem(Item* item)
 	}
 }
 
-bool Container::TakeOutItem(int id, Item* out)
+Item* Container::TakeOutItem(int id)
 {
-	return this->ItemHandler.TakeOutItem(id, out);
+	return &this->ItemHandler.TakeOutItem(id);
 }
 
 bool Container::EnoughSpaceLeft(int neededSpace)

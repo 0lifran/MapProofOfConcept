@@ -1,6 +1,16 @@
 #include "Item.h"
 #include "IdManager.h"
 
+Item::Item(int id, string name, ItemType type, int storageSpace)
+{
+	Id(id);
+	Name(name);
+	ImagePath("Item.png");
+	Type(type);
+	StorageSpace(storageSpace);
+
+}
+
 Item::Item(string name, ItemType type, int storageSpace)
 {
 	Name(name);

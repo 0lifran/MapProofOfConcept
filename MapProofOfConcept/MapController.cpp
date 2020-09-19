@@ -308,7 +308,7 @@ void MapController::RemoveItem(int id)
 		Tile** tiles = Tiles();
 		Item* tempI = new Item();
 		ItemManager* itemHandler = tiles[x, y]->ItemHandler();
-		itemHandler->TakeOutItem(id, tempI);
+		tempI = &itemHandler->TakeOutItem(id);
 		SetItemDataHasChanged(true);
 		delete tempI;
 	} 
@@ -390,7 +390,7 @@ void MapController::PlaceUnitOnTile(int id, int x, int y)
 	Unit* currentUnit = this->GetUnitById(id);
 	currentUnit->X(x);
 	currentUnit->Y(y);
-	this->_tiles[x][y].AddUnit(x,y,*currentUnit);
+	this->_tiles[x][y].AddUnit(x,y,currentUnit);
 	SetUnitDataHasChanged(true);
 }
 int MapController::IncrementNumberOfUnits()
@@ -408,7 +408,7 @@ void MapController::PushUnitToMap(int id)
 	Unit* currentUnit = this->GetUnitById(id);
 	int x = currentUnit->X();
 	int y = currentUnit->Y();
-	this->_tiles[x][y].AddUnit(x,y,*currentUnit);
+	this->_tiles[x][y].AddUnit(x,y,currentUnit);
 	SetUnitDataHasChanged(true);
 }
 Unit* MapController::GetUnitById(int id)

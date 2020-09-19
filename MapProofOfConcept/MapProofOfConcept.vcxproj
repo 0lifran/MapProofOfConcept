@@ -143,6 +143,7 @@
     <ClCompile Include="BallisticWeapon.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="IdManager.cpp" />
+    <ClCompile Include="ItemClassConverter.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="RangedWeapon.cpp" />
     <ClCompile Include="UnitInventoryController.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="IdManager.h" />
+    <ClInclude Include="ItemClassConverter.h" />
     <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="ItemPreset.h" />
     <ClInclude Include="RangedWeapon.h" />

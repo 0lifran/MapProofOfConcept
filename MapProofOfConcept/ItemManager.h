@@ -6,20 +6,17 @@ public:
 	Item* Items();
 	void Items(Item* items);
 	void AddItem(Item* item);
-	bool TakeOutItem(int id, Item* out);
+	Item TakeOutItem(int id);
 	int NumberOfItems();
 	Item* GetItemById(int itemId);
 	void NumberOfItems(int numberOfItems);
-	
-	
+	Item* _items;
+
 private:
 	int _numberOfItems;
-	Item* _items;
 
 	Item* PullOutItemAt(int positionAt);
 	void RemoveItemAtPosition(int positionAt);
 	int IncrementNumberOfItems();
 	int DecrementNumberOfItems();
-
 };
-

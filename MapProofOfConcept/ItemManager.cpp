@@ -1,4 +1,5 @@
 #include "ItemManager.h"
+#include "ItemFactory.h"
 
 Item* ItemManager::Items()
 {
@@ -43,8 +44,9 @@ void ItemManager::AddItem(Item* item)
 	this->Items(tempItems);
 }
 
-bool ItemManager::TakeOutItem(int id, Item* out)
+Item ItemManager::TakeOutItem(int id)
 {
+	ItemFactory factory = *new ItemFactory();
 	Item* tempItems = Items();
 	int positionAt = -1;
 	for (int i = 0; i < NumberOfItems(); i++)
@@ -52,18 +54,20 @@ bool ItemManager::TakeOutItem(int id, Item* out)
 		if (tempItems->Id() == id)
 		{
 			positionAt = i;
-			Item* result = PullOutItemAt(positionAt);
-			out = result;
-			return true;
+			Item result = *PullOutItemAt(positionAt);
+			Item* r = factory.CopyItem(result);
+			Item response = *new Item(result.Id(), result.Name(), result.Type(), result.StorageSpace());
+			RemoveItemAtPosition(positionAt);
+			return response;
 		}
 	}
-	return false;
+	return *new Item();
 }
 
 Item* ItemManager::PullOutItemAt(int positionAt)
 {
 	Item* result = &this->_items[positionAt];
-	RemoveItemAtPosition(positionAt);
+	
 	return result;
 }
 

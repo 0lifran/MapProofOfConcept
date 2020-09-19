@@ -27,6 +27,8 @@ void UnitInventoryController::CurrentUnit(Unit* unit)
 
 Unit* UnitInventoryController::CurrentUnit()
 {
+	// ???
+	// item on this unit is not changed.
 	return this->_unit;
 }
 
@@ -56,12 +58,12 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 {
 	bool result = false;
 	Tile* tile = this->CurrentTile();
-	Item itemFromGround = *new Item();
+	Item* itemFromGround = new Item();
 	Item* itemFromInventory = new Item();
 
 	ItemManager* itemHandler = tile->ItemHandler();
 	Item* item = itemHandler->GetItemById(itemId);
-	itemHandler->TakeOutItem(item->Id(), &itemFromGround);
+	itemFromGround = &itemHandler->TakeOutItem(item->Id());
 
 	switch (bodyPart)
 	{
@@ -76,7 +78,7 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 				bool response = static_cast<Container*>(backItem)->AddItem(item);
 				if (response == false)
 				{
-					this->_itemsOnGround.AddItem(&itemFromGround);
+					this->_itemsOnGround.AddItem(itemFromGround);
 				}
 				return response;
 			}
@@ -84,7 +86,7 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 			{
 				// Swap items.
 				itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Back);
-				this->CurrentUnit()->UnitItem(&itemFromGround,UnitBodyPart::Back);
+				this->CurrentUnit()->UnitItem(itemFromGround,UnitBodyPart::Back);
 				this->_itemsOnGround.AddItem(itemFromInventory);
 				return true;
 			}
@@ -103,7 +105,7 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 		{
 			// Swap items.
 			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Head);
-			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::Head);
+			this->CurrentUnit()->UnitItem(itemFromGround, UnitBodyPart::Head);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
@@ -121,7 +123,7 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 		{
 			// Swap items.
 			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Feet);
-			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::Feet);
+			this->CurrentUnit()->UnitItem(itemFromGround, UnitBodyPart::Feet);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
@@ -139,7 +141,7 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 		{
 			// Swap items.
 			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Hands);
-			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::Hands);
+			this->CurrentUnit()->UnitItem(itemFromGround, UnitBodyPart::Hands);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
@@ -157,7 +159,7 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 		{
 			// Swap items.
 			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::LeftHand);
-			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::LeftHand);
+			this->CurrentUnit()->UnitItem(itemFromGround, UnitBodyPart::LeftHand);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
@@ -170,12 +172,12 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 	}
 	case UnitBodyPart::RightHand:
 	{
-		Item* headItem = this->CurrentUnit()->UnitItem(UnitBodyPart::RightHand);
-		if (headItem->Type() != ItemType::None)
+		Item* rightHandItem = this->CurrentUnit()->UnitItem(UnitBodyPart::RightHand);
+		if (rightHandItem->Type() != ItemType::None)
 		{
 			// Swap items.
 			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::RightHand);
-			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::RightHand);
+			this->CurrentUnit()->UnitItem(itemFromGround, UnitBodyPart::RightHand);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
@@ -193,7 +195,7 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 		{
 			// Swap items.
 			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Legs);
-			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::Legs);
+			this->CurrentUnit()->UnitItem(itemFromGround, UnitBodyPart::Legs);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
@@ -211,7 +213,7 @@ bool UnitInventoryController::AttachItemToUnit(int itemId, UnitBodyPart bodyPart
 		{
 			// Swap items.
 			itemFromInventory = this->CurrentUnit()->UnitItem(UnitBodyPart::Torso);
-			this->CurrentUnit()->UnitItem(&itemFromGround, UnitBodyPart::Torso);
+			this->CurrentUnit()->UnitItem(itemFromGround, UnitBodyPart::Torso);
 			this->_itemsOnGround.AddItem(itemFromInventory);
 			return true;
 		}
