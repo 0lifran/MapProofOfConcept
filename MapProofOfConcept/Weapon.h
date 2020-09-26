@@ -11,6 +11,7 @@ public:
 	void Damage(int damage);
 	WeaponType WeaponSubType();
 	void SubType(WeaponType weaponSubType);
+	WeaponType SubType();
 private:
 	int _damage;
 	WeaponType _weaponSubType;

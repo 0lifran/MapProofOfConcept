@@ -15,6 +15,8 @@ public:
 	int HighRangeMax();
 	int ExtendedRangeMin();
 	int ExtendedRangeMax();
+	int MaximumRange();
+	void MaximumRange(int range);
 
 	void CloseRangeMin(int range);
 	void CloseRangeMax(int range);
@@ -24,6 +26,7 @@ public:
 	void HighRangeMax(int range);
 	void ExtendedRangeMin(int range);
 	void ExtendedRangeMax(int range);
+
 private:
 	int _closeRangeMin;
 	int _closeRangeMax;
@@ -33,6 +36,7 @@ private:
 	int _highRangeMax;
 	int _extendedRangeMin;
 	int _extendedRangeMax;
+	int _maximumRange;
 
 };
 

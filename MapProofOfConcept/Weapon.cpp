@@ -29,3 +29,8 @@ void Weapon::SubType(WeaponType weaponSubType)
 {
 	this->_weaponSubType = weaponSubType;
 }
+
+WeaponType Weapon::SubType()
+{
+	return this->_weaponSubType;
+}

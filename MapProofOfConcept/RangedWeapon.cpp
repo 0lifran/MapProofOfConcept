@@ -101,4 +101,15 @@ void RangedWeapon::ExtendedRangeMin(int range)
 void RangedWeapon::ExtendedRangeMax(int range)
 {
 	this->_extendedRangeMax = range;
+	this->MaximumRange(range);
+}
+
+int  RangedWeapon::MaximumRange()
+{
+	return this->_maximumRange;
+}
+
+void RangedWeapon::MaximumRange(int range)
+{
+	this->_maximumRange = range;
 }

@@ -142,6 +142,7 @@
     <ClCompile Include="BallisticMagazine.cpp" />
     <ClCompile Include="BallisticWeapon.cpp" />
     <ClCompile Include="Container.cpp" />
+    <ClCompile Include="DiceRoller.cpp" />
     <ClCompile Include="IdManager.cpp" />
     <ClCompile Include="ItemClassConverter.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
@@ -164,7 +165,10 @@
     <ClInclude Include="BallisticMagazine.h" />
     <ClInclude Include="BallisticMagazineType.h" />
     <ClInclude Include="BallisticWeapon.h" />
+    <ClInclude Include="CoinSide.h" />
     <ClInclude Include="Container.h" />
+    <ClInclude Include="DiceRoller.h" />
+    <ClInclude Include="DieType.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="IdManager.h" />
     <ClInclude Include="ItemClassConverter.h" />

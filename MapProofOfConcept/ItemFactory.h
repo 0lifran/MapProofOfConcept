@@ -11,7 +11,7 @@ public:
 	
 
 	Item* ProduceItem(ItemPreset preset);
-	Item* CopyItem(Item item);
+	Item* CopyItem(Item* item);
 private:
 	Item* ProduceBackpack();
 	Item* ProduceSemiAutomaticPistol();

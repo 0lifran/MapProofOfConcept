@@ -3,6 +3,7 @@
 #include "Item.h"
 #include "Unit.h"
 #include "UnitInventoryController.h"
+#include "DiceRoller.h"
 
 #pragma once
 class MapController
@@ -11,14 +12,18 @@ public:
 	MapController(int width, int height, Tile** tiles);
 	RenderDataArray* GetRenderData();
 	void AddUnit(Unit* unit);
-	void MoveUnit(int id);
-	void RotateUnit(int id, RotationDirection rotationDirection);
+	void MoveUnit(Unit* unit);
+	void RotateUnit(Unit* unit, RotationDirection rotationDirection);
 	Unit* GetUnitById(int id);
 	Tile* SpecificTileAt(int x, int y);
-	void InitializeInventory(int unitId);
+	void InitializeInventory(Unit* unit);
 	UnitInventoryController* InventoryHandler();
 
 private:
+
+	DiceRoller* Roller();
+	void Roller(DiceRoller* roller);
+	DiceRoller* _roller;
 	 bool _tileDataHasChanged = true;
 	 bool _itemDataHasChanged = true;
 	 bool _unitDataHasChanged = true;

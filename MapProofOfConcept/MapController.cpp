@@ -9,9 +9,8 @@ MapController::MapController(int width, int height, Tile** tiles)
 	Tiles(width, height, tiles);
 }
 
-void MapController::InitializeInventory(int unitId)
+void MapController::InitializeInventory(Unit* unit)
 {
-	Unit* unit = this->GetUnitById(unitId);
 	int tileX = unit->X();
 	int tileY = unit->Y();
 	Tile* tile = this->SpecificTileAt(tileX, tileY);
@@ -308,7 +307,7 @@ void MapController::RemoveItem(int id)
 		Tile** tiles = Tiles();
 		Item* tempI = new Item();
 		ItemManager* itemHandler = tiles[x, y]->ItemHandler();
-		tempI = &itemHandler->TakeOutItem(id);
+		tempI = itemHandler->TakeOutItem(id);
 		SetItemDataHasChanged(true);
 		delete tempI;
 	} 
@@ -423,17 +422,16 @@ Unit* MapController::GetUnitById(int id)
 	}
 	throw new exception("Unit not in list.");
 }
-void MapController::MoveUnit(int id)
+void MapController::MoveUnit(Unit* unit)
 {
 	bool movementIsAllowed = false;
-	Unit* currentUnit = GetUnitById(id);
-	if (this->IsMovementAllowed(currentUnit))
+	if (this->IsMovementAllowed(unit))
 	{
-		Tile * tempTile = SpecificTileAt(currentUnit->X(), currentUnit->Y());
-		tempTile->TakeOutUnit(currentUnit->Id(), currentUnit);
-		currentUnit->Move();
+		Tile * tempTile = SpecificTileAt(unit->X(), unit->Y());
+		tempTile->TakeOutUnit(unit->Id(), unit);
+		unit->Move();
 
-		PlaceUnitOnTile(currentUnit->Id(), currentUnit->X(), currentUnit->Y());
+		PlaceUnitOnTile(unit->Id(), unit->X(), unit->Y());
 		SetUnitDataHasChanged(true);
 	}
 }
@@ -567,10 +565,9 @@ bool MapController::IsMovementAllowed(Unit* unit)
 	}
 	return isAllowed;
 }
-void MapController::RotateUnit(int id, RotationDirection rotationDirection)
+void MapController::RotateUnit(Unit* unit, RotationDirection rotationDirection)
 {
-	Unit* currentUnit = this->GetUnitById(id);
-	currentUnit->Rotate(rotationDirection);
+	unit->Rotate(rotationDirection);
 	SetUnitDataHasChanged(true);
 }
 void MapController::Units(Unit* units)
@@ -636,4 +633,14 @@ void MapController::AddItem(Item* item)
 
 	Items(tempItems);
 	delete[]currentItems;
+}
+
+DiceRoller* MapController::Roller()
+{
+	return this->_roller;
+}
+
+void MapController::Roller(DiceRoller* roller)
+{
+	this->_roller = roller;
 }

@@ -28,53 +28,14 @@ int main()
 			tiles[i][j] = *new Tile(TileType::Grass, 0);
 		}
 	}
-
-	Item item1 = *new Item("Item_1", ItemType::Common, 1);
-	Item item2 = *new Item("Item_2", ItemType::Common, 1);
-
-	Unit* unit1 = new Unit(1, 1, "Unit_1", "Unit.png");
-	Unit* unit2 = new Unit(1, 2, "Unit_2", "Unit.png");
-
-	unit2->UnitItem(itemProducer.ProduceItem(ItemPreset::Backpack), UnitBodyPart::Back);
-
-	tiles[5][5] = *new Tile(TileType::Mud, 1);
-	tiles[5][6] = *new Tile(TileType::Snow, 3);
-	tiles[5][7] = *new Tile(TileType::Water, 2);
-
-	tiles[1][1].AddUnit(1, 1, unit1);
-
-	Weapon w = *new Weapon("test", ItemType::Weapon, 32, 2, WeaponType::Ballistic, 0, 0, 0, 0, 0, 0, 0, 0);
-	BallisticWeapon www = *new BallisticWeapon(
-		"bal", 
-		ItemType::Weapon, 
-		32, 
-		2, 
-		WeaponType::Ballistic, 
-		0, 
-		0, 
-		0, 
-		0, 
-		0, 
-		0, 
-		0, 
-		0, 
-		*new BallisticMagazine(
-			0,
-			0,
-			BallisticMagazineType::NineMm), 
-		BallisticMagazineType::NineMm);
-
-	tiles[4][5].ItemHandler()->AddItem(static_cast<Item*>(&w));
-	tiles[4][5].ItemHandler()->AddItem(static_cast<Item*>(&www));
-
-	Item* ww = itemProducer.ProduceItem(ItemPreset::SemiAutomaticPistol);
-	tiles[4][4].ItemHandler()->AddItem(ww);
-	ItemManager* itemHandler = tiles[8][8].ItemHandler();
-
-	itemHandler->AddItem(&item1);
-
 	MapController* mapController = new MapController(mapWidth, mapHeight, tiles);
-	mapController->AddUnit(unit2);
+
+	Item* item1 = itemProducer.ProduceItem(ItemPreset::SemiAutomaticPistol);
+	Unit* unit1 = new Unit(1, 1, "Unit1", "Unit.png");
+	mapController->AddUnit(unit1);
+
+	tiles[0][0].ItemHandler()->AddItem(item1);
+	//unit1->UnitItem(tiles[0][0].ItemHandler()->TakeOutItem(item1->Id()),UnitBodyPart::RightHand);
 
 	char inputKey = ' ';
 
@@ -125,81 +86,109 @@ int main()
 			cout << endl;
 		}
 
-		/*cout << "Inventory unit 1" << endl;
-		cout << "================" << endl;
-		cout << "Head: " << unit1->UnitItem(UnitBodyPart::Head)->Name() << endl;
-		cout << "Torso: " << unit1->UnitItem(UnitBodyPart::Torso)->Name() << endl;
-		cout << "Left Hand: " << unit1->UnitItem(UnitBodyPart::LeftHand)->Name() << endl;
-		cout << "Right Hand: " << unit1->UnitItem(UnitBodyPart::RightHand)->Name() << endl;
-		cout << "Back: " << unit1->UnitItem(UnitBodyPart::Back)->Name() << endl;
-		cout << "Legs: " << unit1->UnitItem(UnitBodyPart::Legs)->Name() << endl;
-		cout << "Feet: " << unit1->UnitItem(UnitBodyPart::Feet)->Name() << endl;
+		cout << unit1->UnitItem(UnitBodyPart::RightHand)->Name() << endl;
 
-		cout << endl << endl;
-
-		cout << "Inventory unit 2" << endl;
-		cout << "================" << endl;
-		cout << "Head: " << unit2->UnitItem(UnitBodyPart::Head)->Name() << endl;
-		cout << "Torso: " << unit2->UnitItem(UnitBodyPart::Torso)->Name() << endl;
-		cout << "Left Hand: " << unit2->UnitItem(UnitBodyPart::LeftHand)->Name() << endl;
-		cout << "Right Hand: " << unit2->UnitItem(UnitBodyPart::RightHand)->Name() << endl;
-		cout << "Back: " << unit2->UnitItem(UnitBodyPart::Back)->Name() << endl;
-		cout << "Legs: " << unit2->UnitItem(UnitBodyPart::Legs)->Name() << endl;
-		cout << "Feet: " << unit2->UnitItem(UnitBodyPart::Feet)->Name() << endl;*/
-
-		cout << "1: " << unit1->UnitItem(UnitBodyPart::RightHand)->Name() << endl;
-		cout << "2: " << unit2->UnitItem(UnitBodyPart::RightHand)->Name() << endl;
-
-		if (toggle)
-		{
-			cout << "3" << endl;
-		}
-		else
-		{
-			cout << "4" << endl;
-		}
-
-		cout << "(w) Move (a) Rotate left (d) Rotate right (x) Swap unit selection (g) Add item from ground to rucksack as unit 3 (j) Take pistol from ground (0) Exit" << endl << endl;
-		cout << "Input: ";
 		cin >> inputKey;
 		switch (inputKey)
 		{
-		case 'w':
-			mapController->MoveUnit(toggle ? 3 : 4);
-			break;
 		case 'a':
-			mapController->RotateUnit(toggle ? 3 : 4, RotationDirection::Left);
-			break;
-		case 'd':
-			mapController->RotateUnit(toggle ? 3 : 4, RotationDirection::Right);
-			break;
-		case 'g':
 		{
-			cout << "g";
-			cin.get();
+			mapController->RotateUnit(unit1, RotationDirection::Left);
 			break;
 		}
-		case 'j':
+		case 'd':
 		{
-			Item* fromGround = &tiles[4][4].ItemHandler()->TakeOutItem(6);
-			Unit* current = mapController->GetUnitById(toggle ? 3 : 4);
-			current->UnitItem(fromGround, UnitBodyPart::RightHand);
-			if (toggle)
+			mapController->RotateUnit(unit1, RotationDirection::Right);
+			break;
+		}
+		case 'w':
+		{
+			mapController->MoveUnit(unit1);
+			break;
+		}
+		case 't':
+		{
+			// Pick up item from ground.
+			if (tiles[unit1->X()][unit1->Y()].ItemHandler()->NumberOfItems() != 0)
 			{
-				unit1 = current;
+				int id = tiles[unit1->X()][unit1->Y()].ItemHandler()->Items()[0].Id();
+				Item* item = tiles[unit1->X()][unit1->Y()].ItemHandler()->TakeOutItem(id);
+				mapController->InitializeInventory(unit1);
+				mapController->InventoryHandler()->AttachItemToUnit(item, UnitBodyPart::RightHand);
+			}
+			else 
+			{
+				cout << "Nothing there!" << endl;
+				cin.get();
+			}
+			break;
+		}
+		case 'r':
+		{
+			Item* item = mapController->InventoryHandler()->DetachItemFromUnit(UnitBodyPart::RightHand);
+			tiles[unit1->X()][unit1->Y()].ItemHandler()->AddItem(item);
+		}
+		case 'i':
+		{
+			cout << "Inventory" << endl;
+			cout << "*********" << endl;
+			cout << "Head: " << unit1->UnitItem(UnitBodyPart::Head)->Name() << endl;
+			cout << "Torso: " << unit1->UnitItem(UnitBodyPart::Torso)->Name() << endl;
+			cout << "Back: " << unit1->UnitItem(UnitBodyPart::Back)->Name() << endl;
+			cout << "Hands: " << unit1->UnitItem(UnitBodyPart::Hands)->Name() << endl;
+			cout << "LeftHand: " << unit1->UnitItem(UnitBodyPart::LeftHand)->Name() << endl;
+			cout << "RightHand: " << unit1->UnitItem(UnitBodyPart::RightHand)->Name() << endl;
+			cout << "Legs: " << unit1->UnitItem(UnitBodyPart::Legs)->Name() << endl;
+			cout << "Feet: " << unit1->UnitItem(UnitBodyPart::Feet)->Name() << endl;
+			char inputInventory = ' ';
+			while (inputInventory != 'c')
+			{
+				cin >> inputInventory;
+			}
+			break;
+		}
+		case 'f':
+		{
+			// mapController->AttackWithUnit();
+			if (unit1->UnitItem(UnitBodyPart::RightHand)->Type() == ItemType::Weapon)
+			{
+				ItemClassConverter* ic = new ItemClassConverter();
+				Weapon* ui = ic->ConvertToWeapon(unit1->UnitItem(UnitBodyPart::RightHand));
+				if (ui->SubType() == WeaponType::Ballistic)
+				{
+					BallisticWeapon* bW = ic->ConvertToBallisticWeapon(ui);
+					// double distance = GetDistanceToTargetTile(startTile, targetTile);
+					// Vector3d vector = CalculateTargetVector();
+
+					double distance = 0;
+
+					if (bW->MaximumRange() < distance)
+					{
+						if (bW->Fire())
+						{
+							
+						}
+						else
+						{
+							if (bW->Magazine()->BulletsLeft() == 0)
+							{
+								cout << "Weapon is empty.";
+							}
+						}
+					}
+					else
+					{
+						cout << "Target is too far away for this weapon.";
+					}
+					
+				}
 			}
 			else
 			{
-				unit2 = current;
+				cout << "This is not a weapon!" << endl;
+				cin.get();
 			}
-			cout << "j";
-			cin.get();
-			break;
 		}
-		case 'x':
-			toggle = !toggle;
-		default:
-			break;
 		}
 	}
 }

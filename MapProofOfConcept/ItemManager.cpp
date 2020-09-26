@@ -11,83 +11,84 @@ void ItemManager::Items(Item* items)
 	this->_items = items;
 }
 
-
 Item* ItemManager::GetItemById(int itemId)
 {
-	Item* items = Items();
-	for (int i = 0; i < NumberOfItems(); i++)
+	for (int i = 0; i < this->NumberOfItems(); i++)
 	{
-		if (items[i].Id() == itemId)
+		if (itemId == this->Items()[i].Id())
 		{
-			return &items[i];
+			return &this->Items()[i];
 		}
 	}
-	throw new exception("Item is not in list.");
 }
 
 void ItemManager::AddItem(Item* item)
 {
-	int currentNumberOfItems = IncrementNumberOfItems();
-	Item* currentItems = Items();
-	Item* tempItems = new Item[currentNumberOfItems];
-	for (int i = 0; i < currentNumberOfItems; i++)
+	Item** itemArray;
+	if (this->NumberOfItems() + 1 != 0)
 	{
-		if (i == 0)
+		itemArray = new Item * [this->NumberOfItems() + 1];
+	}
+	else
+	{
+		itemArray = NULL;
+	}
+
+	for (int i = 0; i < this->NumberOfItems() + 1; i++)
+	{
+		if (i < this->NumberOfItems())
 		{
-			tempItems[i] = *item;
+			itemArray[i] = &this->Items()[i];
 		}
 		else
 		{
-			tempItems[i] = currentItems[i - 1];
+			itemArray[i] = item;
 		}
 	}
-	this->Items(tempItems);
+	this->IncrementNumberOfItems();
+	this->Items(*itemArray);
 }
 
-Item ItemManager::TakeOutItem(int id)
+Item* ItemManager::TakeOutItem(int id)
 {
-	ItemFactory factory = *new ItemFactory();
-	Item* tempItems = Items();
-	int positionAt = -1;
-	for (int i = 0; i < NumberOfItems(); i++)
+	Item* item = this->GetItemById(id);
+	Item** newItems = new Item * [this->NumberOfItems() - 1];
+	Item* result = new Item();
+
+	bool past = false;
+	for (int i = 0; i < this->NumberOfItems(); i++)
 	{
-		if (tempItems->Id() == id)
+		if (this->Items()->Id() != id)
 		{
-			positionAt = i;
-			Item result = *PullOutItemAt(positionAt);
-			Item* r = factory.CopyItem(result);
-			Item response = *new Item(result.Id(), result.Name(), result.Type(), result.StorageSpace());
-			RemoveItemAtPosition(positionAt);
-			return response;
+			// 1 2 3 4 5
+			// 1 2 4 5
+			if (past)
+			{
+				newItems[i] = &this->Items()[i];
+			}
+			else
+			{
+				newItems[i - 1] = &this->Items()[i];
+			}
+		}
+		else
+		{
+			past = true;
+			result = this->Items();
 		}
 	}
-	return *new Item();
+	this->Items(*newItems);
+	this->DecrementNumberOfItems();
+	return result;
 }
 
 Item* ItemManager::PullOutItemAt(int positionAt)
 {
-	Item* result = &this->_items[positionAt];
-	
-	return result;
+	return new Item();
 }
 
 void ItemManager::RemoveItemAtPosition(int positionAt)
 {
-	int numberOfItems = DecrementNumberOfItems();
-	Item* tempItems = new Item[numberOfItems];
-	Item* currentItems = Items();
-
-	for (int i = 0; i < numberOfItems; i++)
-	{
-		if (i < positionAt)
-		{
-			tempItems[i] = currentItems[i];
-		}
-		else
-		{
-			tempItems[i] = currentItems[i + 1];
-		}
-	}
 }
 
 int ItemManager::NumberOfItems()
@@ -112,7 +113,7 @@ int ItemManager::DecrementNumberOfItems()
 	{
 		this->_numberOfItems--;
 	}
-	else 
+	else
 	{
 		throw new exception("The number of items must not be less than zero.");
 	}

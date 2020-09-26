@@ -129,6 +129,9 @@
     <ClCompile Include="ItemClassConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DiceRoller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ItemManager.h">
@@ -204,6 +207,15 @@
       <Filter>Header Files\Component\Item\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="ItemClassConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DiceRoller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinSide.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DieType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,7 +5,7 @@ class ItemClassConverter
 {
 public:
 	Container* ConvertToContainer(Item* item);
-	BallisticWeapon* ConvertToBallisticWeapon(RangedWeapon* item);
+	BallisticWeapon* ConvertToBallisticWeapon(Weapon* item);
 	Weapon* ConvertToWeapon(Item* item);
 	RangedWeapon* ConvertToRangedWeapon(Weapon* input);
 

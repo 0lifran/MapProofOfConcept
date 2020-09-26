@@ -5,11 +5,11 @@ Container* ItemClassConverter::ConvertToContainer(Item* input)
 	return static_cast<Container*>(input);
 }
 
-BallisticWeapon* ItemClassConverter::ConvertToBallisticWeapon(RangedWeapon* input)
+BallisticWeapon* ItemClassConverter::ConvertToBallisticWeapon(Weapon* input)
 {
-	Weapon* w = this->ConvertToWeapon(input);
-	Weapon* rW = this->ConvertToRangedWeapon(w);
-	return static_cast<BallisticWeapon*>(input);
+
+	Weapon* rW = this->ConvertToRangedWeapon(input);
+	return static_cast<BallisticWeapon*>(rW);
 }
 
 RangedWeapon* ItemClassConverter::ConvertToRangedWeapon(Weapon* input)

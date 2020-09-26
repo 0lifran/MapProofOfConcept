@@ -29,7 +29,12 @@ Item* ItemFactory::ProduceBackpack()
 
 Item* ItemFactory::ProduceSemiAutomaticPistol()
 {
-	return static_cast<Item*>(new BallisticWeapon(
+	BallisticMagazine* magazine = new BallisticMagazine(
+		10,
+		10,
+		BallisticMagazineType::NineMm);
+
+	BallisticWeapon* result = new BallisticWeapon(
 		"Semi Automatic Pistol",
 		ItemType::Weapon,
 		3,
@@ -43,11 +48,9 @@ Item* ItemFactory::ProduceSemiAutomaticPistol()
 		15,
 		16,
 		20,
-		*new BallisticMagazine(
-			10,
-			10,
-			BallisticMagazineType::NineMm),
-		BallisticMagazineType::NineMm));
+		magazine,
+		BallisticMagazineType::NineMm);
+	return static_cast<Item*>(result);
 }
 
 void ItemFactory::ItemClassTransformer(ItemClassConverter* converter)
@@ -60,62 +63,12 @@ ItemClassConverter* ItemFactory::ItemClassTransformer()
 	return &this->_itemClassTransformer;
 }
 
-Item* ItemFactory::CopyItem(Item item)
+Item* ItemFactory::CopyItem(Item* item)
 {
-	switch (item.Type())
+	if (item->Type() == ItemType::Weapon)
 	{
-	case ItemType::Common:
-	{
-		return new Item(item.Id(), item.Name(), item.Type(), item.StorageSpace());
-		break;
+		Weapon* w = static_cast<Weapon*>(item);
 	}
-	case ItemType::Container:
-	{
-		Container containerItem = *this->ItemClassTransformer()->ConvertToContainer(&item);
-		Container result = *new Container(containerItem.Name(), containerItem.StorageSpace(), containerItem.Capacity());
-		return &result;
-		break;
-	}
-	case ItemType::Weapon:
-	{
-		Weapon weaponItem = *this->ItemClassTransformer()->ConvertToWeapon(&item);
-		switch (weaponItem.WeaponSubType())
-		{
-		case WeaponType::Ballistic:
-		{
-			Weapon w = *this->ItemClassTransformer()->ConvertToWeapon(&item);
-			RangedWeapon rW = *this->ItemClassTransformer()->ConvertToRangedWeapon(&w);
-			BallisticWeapon ballisticWeaponItem = *this->ItemClassTransformer()->ConvertToBallisticWeapon(&rW);
-
-			BallisticWeapon result = *new BallisticWeapon(
-				ballisticWeaponItem.Name(),
-				ballisticWeaponItem.Type(),
-				ballisticWeaponItem.StorageSpace(),
-				ballisticWeaponItem.Damage(),
-				ballisticWeaponItem.WeaponSubType(),
-				ballisticWeaponItem.CloseRangeMin(),
-				ballisticWeaponItem.CloseRangeMax(),
-				ballisticWeaponItem.MediumRangeMin(),
-				ballisticWeaponItem.MediumRangeMax(),
-				ballisticWeaponItem.HighRangeMin(),
-				ballisticWeaponItem.HighRangeMax(),
-				ballisticWeaponItem.ExtendedRangeMin(),
-				ballisticWeaponItem.ExtendedRangeMax(),
-				*ballisticWeaponItem.Magazine(),
-				ballisticWeaponItem.MagazineType());
-			break;
-		}
-		default:
-		{
-			throw new exception("Unknown weapon type.");
-		}
-		}
-		break;
-	}
-	default:
-	{
-		throw new exception("Unknown item type.");
-	}
-	}
+	return new Item();
 }
 

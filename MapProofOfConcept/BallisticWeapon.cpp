@@ -14,7 +14,7 @@ BallisticWeapon::BallisticWeapon(
 	int highRangeMax, 
 	int extendedRangeMin, 
 	int extendedRangeMax, 
-	BallisticMagazine magazine, 
+	BallisticMagazine* magazine, 
 	BallisticMagazineType ammoType) 
 	: RangedWeapon(
 		name, 
@@ -31,6 +31,7 @@ BallisticWeapon::BallisticWeapon(
 		extendedRangeMin, 
 		extendedRangeMax)
 {
+	this->Magazine(magazine);
 	this->MagazineType(ammoType);
 }
 

@@ -21,7 +21,7 @@ public:
 		int highRangeMax, 
 		int extendedRangeMin, 
 		int extendedRangeMax, 
-		BallisticMagazine magazine, 
+		BallisticMagazine* magazine, 
 		BallisticMagazineType ammoType);
 	BallisticWeapon();
 	
