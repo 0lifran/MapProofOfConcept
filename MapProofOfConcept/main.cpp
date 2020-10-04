@@ -183,7 +183,21 @@ int main()
 			{
 				Vector3d idealTargetVector = geoCalc->CalculateVectorToTargetTile(*startVector, *targetVector);
 				// distance -> unitSkill -> castDie -> Success?
+				int pistolSkill = unit1->PistolSkill()->SkillLevel();
+				DiceRoller* dRoller = new DiceRoller();
 				
+				int dieResult = dRoller->RollDice(1, DieType::DSix);
+				int rangeMalus = mapController->GetUnitWeaponDistanceMalus(distance, unit1);
+				int resultPlusBonus = dieResult - pistolSkill + rangeMalus;
+				
+				// 12 + 4 - 1	= 15
+				// 15 - 2 = 13 => Category 13 failure.
+				// 15 - 12 = 3 => Category 3 failure.
+				// --
+				// 12 + 1 - 2 = 11
+				// 11 - 2 = 9 => Category 9 failure;
+				// 11 - 12 = -1 => Category -1 success == 100%;
+
 			}
 			else
 			{

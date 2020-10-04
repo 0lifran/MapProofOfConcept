@@ -28,6 +28,7 @@ public:
 	bool TakeOutMagazine(BallisticMagazine* out);
 	bool Reload(BallisticMagazine* magazine, BallisticMagazine* out);
 	bool Fire();
+
 	
 	BallisticMagazine* Magazine();
 	BallisticMagazineType MagazineType();

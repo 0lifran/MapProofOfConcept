@@ -26,6 +26,8 @@ public:
 	void HighRangeMax(int range);
 	void ExtendedRangeMin(int range);
 	void ExtendedRangeMax(int range);
+	int CalculateRangeMalus(double distance);
+
 
 private:
 	int _closeRangeMin;

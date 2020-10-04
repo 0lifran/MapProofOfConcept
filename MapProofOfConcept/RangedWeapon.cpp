@@ -113,3 +113,37 @@ void RangedWeapon::MaximumRange(int range)
 {
 	this->_maximumRange = range;
 }
+
+
+	int RangedWeapon::CalculateRangeMalus(double distance)
+	{
+		int flooredDistance = floor(distance);
+		if (
+			this->CloseRangeMin() <= flooredDistance &&
+			this->CloseRangeMax() >= flooredDistance)
+		{
+			return 0;
+		}
+		else if (
+			this->MediumRangeMin() <= flooredDistance &&
+			this->MediumRangeMax() >= flooredDistance)
+		{
+			return 1;
+		}
+		else if (
+			this->HighRangeMin() <= flooredDistance &&
+			this->HighRangeMax() >= flooredDistance)
+		{
+			return 2;
+		}
+		else if (
+			this->ExtendedRangeMin() <= flooredDistance &&
+			this->ExtendedRangeMax() >= flooredDistance)
+		{
+			return 3;
+		}
+		else
+		{
+			throw new exception();
+		}
+	}

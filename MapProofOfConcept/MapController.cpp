@@ -647,6 +647,26 @@ void MapController::Roller(DiceRoller* roller)
 	this->_roller = roller;
 }
 
+int MapController::GetUnitWeaponDistanceMalus(double distance, Unit* unit)
+{
+	int result = 0;
+	if (unit->UnitItem(UnitBodyPart::RightHand)->Type() == ItemType::Weapon)
+	{
+		ItemClassConverter* itemConverter = new ItemClassConverter();
+		Weapon* ui = itemConverter->ConvertToWeapon(unit->UnitItem(UnitBodyPart::RightHand));
+		if (ui->SubType() == WeaponType::Ballistic)
+		{
+			BallisticWeapon* bW = itemConverter->ConvertToBallisticWeapon(ui);
+			result = bW->CalculateRangeMalus(distance);
+		}
+	}
+	else
+	{
+		throw new exception("");
+	}
+	return result;
+}
+
 ActionResultInfo MapController::FireUnitWeapon(double distance, Unit* unit)
 {
 	ActionResultInfo result = ActionResultInfo::None;

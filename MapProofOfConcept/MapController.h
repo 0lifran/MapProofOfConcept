@@ -21,6 +21,7 @@ public:
 	void InitializeInventory(Unit* unit);
 	UnitInventoryController* InventoryHandler();
 	ActionResultInfo FireUnitWeapon(double distance, Unit* unit1);
+	int GetUnitWeaponDistanceMalus(double distance, Unit* unit);
 	double GetDistanceToTargetTile(Vector3d start, Vector3d target);
 	Vector3d CalculateVectorToTargetTile(Vector3d startPoint, Vector3d targetPoint);
 
