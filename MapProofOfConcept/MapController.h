@@ -4,6 +4,8 @@
 #include "Unit.h"
 #include "UnitInventoryController.h"
 #include "DiceRoller.h"
+#include "ActionResultInfo.h"
+#include "Vector3d.h"
 
 #pragma once
 class MapController
@@ -18,6 +20,9 @@ public:
 	Tile* SpecificTileAt(int x, int y);
 	void InitializeInventory(Unit* unit);
 	UnitInventoryController* InventoryHandler();
+	ActionResultInfo FireUnitWeapon(double distance, Unit* unit1);
+	double GetDistanceToTargetTile(Vector3d start, Vector3d target);
+	Vector3d CalculateVectorToTargetTile(Vector3d startPoint, Vector3d targetPoint);
 
 private:
 

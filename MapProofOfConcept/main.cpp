@@ -7,6 +7,7 @@
 #include "Printer.h"
 #include "ItemFactory.h"
 #include "ItemClassConverter.h"
+#include "GeometryCalculator.h"
 
 using namespace std;
 
@@ -31,7 +32,7 @@ int main()
 	MapController* mapController = new MapController(mapWidth, mapHeight, tiles);
 
 	Item* item1 = itemProducer.ProduceItem(ItemPreset::SemiAutomaticPistol);
-	Unit* unit1 = new Unit(1, 1, "Unit1", "Unit.png");
+	Unit* unit1 = new Unit(1, 1, "Unit1", "Unit.png", new UnitSkill("Pistol skill", 1));
 	mapController->AddUnit(unit1);
 
 	tiles[0][0].ItemHandler()->AddItem(item1);
@@ -116,7 +117,7 @@ int main()
 				mapController->InitializeInventory(unit1);
 				mapController->InventoryHandler()->AttachItemToUnit(item, UnitBodyPart::RightHand);
 			}
-			else 
+			else
 			{
 				cout << "Nothing there!" << endl;
 				cin.get();
@@ -149,44 +150,44 @@ int main()
 		}
 		case 'f':
 		{
-			// mapController->AttackWithUnit();
-			if (unit1->UnitItem(UnitBodyPart::RightHand)->Type() == ItemType::Weapon)
+			int x = -1;
+			while (x < 0)
 			{
-				ItemClassConverter* ic = new ItemClassConverter();
-				Weapon* ui = ic->ConvertToWeapon(unit1->UnitItem(UnitBodyPart::RightHand));
-				if (ui->SubType() == WeaponType::Ballistic)
-				{
-					BallisticWeapon* bW = ic->ConvertToBallisticWeapon(ui);
-					// double distance = GetDistanceToTargetTile(startTile, targetTile);
-					// Vector3d vector = CalculateTargetVector();
+				cout << "Input x: ";
+				cin >> x;
+			}
 
-					double distance = 0;
+			int y = -1;
+			while (y < 0)
+			{
+				cout << "Input y: ";
+				cin >> y;
+			}
 
-					if (bW->MaximumRange() < distance)
-					{
-						if (bW->Fire())
-						{
-							
-						}
-						else
-						{
-							if (bW->Magazine()->BulletsLeft() == 0)
-							{
-								cout << "Weapon is empty.";
-							}
-						}
-					}
-					else
-					{
-						cout << "Target is too far away for this weapon.";
-					}
-					
-				}
+			int z = -1;
+			while (z < 0)
+			{
+				cout << "Input z: ";
+				cin >> z;
+			}
+
+			Tile* start = mapController->SpecificTileAt(unit1->X(), unit1->Y());
+			Vector3d* startVector = new Vector3d(unit1->X(), unit1->Y(), start->Height());
+			Vector3d* targetVector = new Vector3d(x, y, z);
+			Tile* target = mapController->SpecificTileAt(x, y);
+
+			GeometryCalculator* geoCalc = new GeometryCalculator();
+			double distance = geoCalc->CalculateDistanceBetweenTwo3dPoints(*startVector, *targetVector);
+
+			if (mapController->FireUnitWeapon(distance, unit1) == ActionResultInfo::WeaponFired)
+			{
+				Vector3d idealTargetVector = geoCalc->CalculateVectorToTargetTile(*startVector, *targetVector);
+				// distance -> unitSkill -> castDie -> Success?
+				
 			}
 			else
 			{
-				cout << "This is not a weapon!" << endl;
-				cin.get();
+				// Translate ActionResult to string.
 			}
 		}
 		}

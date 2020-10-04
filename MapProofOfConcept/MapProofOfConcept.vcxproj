@@ -143,6 +143,7 @@
     <ClCompile Include="BallisticWeapon.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="DiceRoller.cpp" />
+    <ClCompile Include="GeometryCalculator.cpp" />
     <ClCompile Include="IdManager.cpp" />
     <ClCompile Include="ItemClassConverter.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
@@ -159,6 +160,8 @@
     <ClCompile Include="RotationDirection.h" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitSkill.cpp" />
+    <ClCompile Include="Vector3d.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +173,8 @@
     <ClInclude Include="DiceRoller.h" />
     <ClInclude Include="DieType.h" />
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="ActionResultInfo.h" />
+    <ClInclude Include="GeometryCalculator.h" />
     <ClInclude Include="IdManager.h" />
     <ClInclude Include="ItemClassConverter.h" />
     <ClInclude Include="ItemFactory.h" />
@@ -188,6 +193,8 @@
     <ClInclude Include="TileType.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitBodyPart.h" />
+    <ClInclude Include="UnitSkill.h" />
+    <ClInclude Include="Vector3d.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponType.h" />
   </ItemGroup>

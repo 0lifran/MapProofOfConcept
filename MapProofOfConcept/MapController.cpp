@@ -2,6 +2,8 @@
 #include "RenderData.h"
 #include "RenderDataArray.h"
 #include <iostream>
+#include "ItemClassConverter.h"
+#include "GeometryCalculator.h"
 
 MapController::MapController(int width, int height, Tile** tiles)
 {
@@ -643,4 +645,66 @@ DiceRoller* MapController::Roller()
 void MapController::Roller(DiceRoller* roller)
 {
 	this->_roller = roller;
+}
+
+ActionResultInfo MapController::FireUnitWeapon(double distance, Unit* unit)
+{
+	ActionResultInfo result = ActionResultInfo::None;
+	if (unit->UnitItem(UnitBodyPart::RightHand)->Type() == ItemType::Weapon)
+	{
+		ItemClassConverter* itemConverter = new ItemClassConverter();
+		Weapon* ui = itemConverter->ConvertToWeapon(unit->UnitItem(UnitBodyPart::RightHand));
+		if (ui->SubType() == WeaponType::Ballistic)
+		{
+			BallisticWeapon* bW = itemConverter->ConvertToBallisticWeapon(ui);
+			Vector3d start = *new Vector3d(unit->X(), unit->Y(), this->SpecificTileAt(unit->X(), unit->Y())->Height());
+			if (bW->MaximumRange() > distance)
+			{
+				if (bW->Fire())
+				{
+					result = ActionResultInfo::WeaponFired;
+				}
+				else
+				{
+					if (bW->Magazine()->BulletsLeft() == 0)
+					{
+						result = ActionResultInfo::NoAmmunition;
+					}
+				}
+			}
+			else
+			{
+				result = ActionResultInfo::OutOfRange;
+			}
+		}
+	}
+	else
+	{
+		result = ActionResultInfo::NotAWeapon;
+	}
+	return result;
+}
+
+double MapController::GetDistanceToTargetTile(Vector3d start, Vector3d target)
+{
+	start.X(start.X() - 0.5);
+	start.Y(start.Y() - 0.5);
+	start.Z(start.Z());
+	target.X(target.X() - 0.5);
+	target.Y(target.Y() - 0.5);
+	target.Z(target.Z());
+
+	GeometryCalculator* geoCalc = new GeometryCalculator();
+
+	double result = geoCalc->CalculateDistanceBetweenTwo3dPoints(start, target);
+	return result;
+}
+
+Vector3d MapController::CalculateVectorToTargetTile(Vector3d startPoint, Vector3d targetPoint)
+{
+	Vector3d result = *new Vector3d(0,0,0);
+	result.X(targetPoint.X() - 0.5 - startPoint.X() - 0.5);
+	result.Y(targetPoint.Y() - 0.5 - startPoint.Y() - 0.5);
+	result.Z(targetPoint.Z() - startPoint.Z());
+	return result;
 }

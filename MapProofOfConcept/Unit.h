@@ -4,6 +4,7 @@
 #include "Direction.h"
 #include "Item.h"
 #include "UnitBodyPart.h"
+#include "UnitSkill.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ class Unit
 {
 public:
 	Unit();
-	Unit(int x, int y, string name, string imagePath);
+	Unit(int x, int y, string name, string imagePath, UnitSkill* pistolSkill);
 
 	int Id();
 	int X();
@@ -33,9 +34,12 @@ public:
 	Item* UnitItem(UnitBodyPart bodyPart);
 	void UnitItem(Item* item, UnitBodyPart bodyPart);
 
-	
+	UnitSkill* PistolSkill();
+	void PistolSkill(UnitSkill* pistolSkill);
 
 private:
+	UnitSkill* _pistolSkill;
+
 	void Id(int id);
 	void DirectionAngle(Direction direction);
 

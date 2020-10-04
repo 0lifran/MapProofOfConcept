@@ -126,11 +126,20 @@
     <ClCompile Include="Container.cpp">
       <Filter>Source Files\Component\Item\Container</Filter>
     </ClCompile>
-    <ClCompile Include="ItemClassConverter.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Vector3d.cpp">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryCalculator.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="DiceRoller.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemClassConverter.cpp">
+      <Filter>Source Files\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitSkill.cpp">
+      <Filter>Source Files\Component\Unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,17 +215,29 @@
     <ClInclude Include="RangedWeapon.h">
       <Filter>Header Files\Component\Item\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="ItemClassConverter.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ActionResultInfo.h">
+      <Filter>Header Files\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3d.h">
+      <Filter>Header Files\Shared</Filter>
     </ClInclude>
     <ClInclude Include="DiceRoller.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="CoinSide.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="DieType.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryCalculator.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemClassConverter.h">
+      <Filter>Header Files\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitSkill.h">
+      <Filter>Header Files\Component\Unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

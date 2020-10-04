@@ -1,7 +1,7 @@
 #include "Unit.h"
 #include "IdManager.h"
 
-Unit::Unit(int x, int y, string name, string imagePath)
+Unit::Unit(int x, int y, string name, string imagePath, UnitSkill* pistolSkill)
 {
 	this->X(x);
 	this->Y(y);
@@ -10,6 +10,9 @@ Unit::Unit(int x, int y, string name, string imagePath)
 	IdManager idHandler = *new IdManager();
 	this->Id(idHandler.GetNewId());
 	this->DirectionAngle(Direction::South);
+	this->PistolSkill(pistolSkill);
+
+	
 
 	this->Head(new Item());
 	this->Torso(new Item());
@@ -353,4 +356,14 @@ void Unit::UnitItem(Item* item, UnitBodyPart bodyPart)
 		throw new exception("Unknown unit body part.");
 	}
 	}
+}
+
+UnitSkill* Unit::PistolSkill()
+{
+	return this->_pistolSkill;
+}
+
+void Unit::PistolSkill(UnitSkill* pistolSkill)
+{
+	this->_pistolSkill = pistolSkill;
 }
